@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Special Perfume</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+      }
+
+      /* Top Navigation Bar */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: #6a0dad;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        height: 50px;
+      }
+
+      .logo img {
+        height: 40px;
+        width: auto;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+      }
+
+      .nav-links a:hover {
+        color: #ffccff;
+      }
+
+      /* Product Page Layout */
+      .product-page {
+        display: flex;
+        align-items: flex-start;
+        max-width: 1200px;
+        margin: 50px auto;
+        gap: 80px;
+        margin-left: 45px;
+        margin-right: 45px;
+      }
+
+      /* Product Image Container */
+      .product-image-container {
+        position: sticky;
+        top: 120px;
+        transform: translateX(-100px);
+        transform: translateY(0px);
+        margin-left: 0px;
+        align-items: center;
+        flex: 1.2; /* Take up equal space on the left */
+        max-width: 50%;
+        height: auto;
+        overflow: hidden;
+        border-radius: 5%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+      }
+
+      .product-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.1s ease;
+      }
+      .product-name {
+        flex: 1;
+        padding: 20px;
+      }
+      .product-name p {
+        font-size: large;
+        color: goldenrod;
+        font-weight: bold;
+      }
+
+      /* Product Details */
+      .product-details {
+        flex: 1; /* Take up equal space on the right */
+        padding: 20px;
+      }
+
+      .product-details h1 {
+        color: #6a0dad;
+        margin-bottom: 20px;
+      }
+      .product-details h2 {
+        color: #6a0dad;
+        margin-bottom: 20px;
+      }
+      .product-details h3 {
+        font-weight: bold;
+        display: inline;
+      }
+      .product-details p {
+        font-size: 2rem;
+      }
+      .product-details strong {
+        color: #6a0dad;
+      }
+      .product-details li {
+        margin-bottom: 10px;
+        transform: translateX(-20px);
+      }
+      .product-details p {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .product-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgb(218, 168, 41);
+        margin-bottom: 20px;
+        margin-left: 10px;
+      }
+
+      /* Product Attributes */
+      .product-attributes {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+        margin-left: 30px;
+        margin-top: 30px;
+      }
+
+      .product-attributes li {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .product-attributes span {
+        font-weight: bold;
+        color: #6a0dad;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="logo">
+        <img
+          src="https://manashamim.ir/wp-content/uploads/2023/11/Mana-Shamim-Golsa-Logo-smal.png"
+          alt="Manashamim Logo"
+        />
+      </div>
+      <ul class="nav-links">
+        <li><a href="/Mana2.html">Home</a></li>
+        <li><a href="/products.html">Products</a></li>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Product Page Content -->
+    <div class="product-page">
+      <!-- Image with Dynamic Zoom Feature -->
+      <div class="product-image-container" id="product-image-container">
+        <img
+          src="https://via.placeholder.com/900x600"
+          alt="Special Perfume Image"
+          id="product-image"
+        />
+      </div>
+      <div class="product-details">
+        <p
+          style="
+            font-size: 36px;
+            font-weight: bold;
+            color: goldenrod;
+            margin-top: 20px;
+          "
+        >
+          Chanel Chance Royal Eau de Parfum For Women
+        </p>
+        <ul class="product-attributes">
+          <li style="margin-bottom: 15px"><span>Volume:</span> 8 ml</li>
+          <li style="margin-bottom: 15px"><span>Nature:</span> Cool</li>
+          <li style="margin-bottom: 15px"><span>Scent:</span> Sweet</li>
+          <li style="margin-bottom: 15px"><span>Longevity:</span> Excellent</li>
+          <li style="margin-bottom: 15px"><span>Diffusion:</span> Excellent</li>
+          <li style="margin-bottom: 10px">
+            <span>Suitable for:</span> Spring and Summer
+          </li>
+        </ul>
+        <p>
+          **Zara Red Temptation Woman Royal** is one of the stunning and
+          captivating perfumes from the **Zara** brand, categorized as an
+          **oriental floral** fragrance. With its sweet, warm, and alluring
+          scent, it offers a unique and delightful perfume experience. This
+          fragrance is specifically designed for women seeking a strong,
+          charming, and impactful scent.
+        </p>
+        <p>
+          **Zara Red Temptation Woman**, with its elegant and stylish bottle
+          design, captures attention effortlessly. The scent blends sweet and
+          subtle notes of white flowers, fruits, and woods, resulting in a warm
+          and delightful fragrance. This perfume, exuding a sense of warmth and
+          allure, can easily become one of your top choices for special days.
+        </p>
+        <div class="details-container">
+          <h2>Fragrance Notes</h2>
+          <p>
+            The fragrance of **Zara Red Temptation Woman Royal** is a
+            combination of sweet, floral, and woody notes that come together to
+            create a warm and complex scent. This perfume is specifically
+            designed for women who want to appear attractive, seductive, and
+            confident in any situation.
+          </p>
+          <ul>
+            <li>
+              <strong>Top Notes:</strong> At first, scents of saffron,
+              coriander, and bitter blood orange emerge, offering a sense of
+              freshness and pleasant sweetness. These fruity notes create a
+              vibrant and sweet opening for the fragrance.
+            </li>
+            <li>
+              <strong>Middle Notes:</strong> As time passes, the aromas of
+              jasmine and praline come forward, adding a floral and delicate
+              touch. This floral blend combines with the fruity top notes to
+              give the perfume depth and complexity.
+            </li>
+            <li>
+              <strong>Base Notes:</strong> Finally, woody amber, musk, and
+              oakmoss notes appear, adding warmth and greater depth to the
+              scent. These woody and sweet notes ensure that the fragrance of
+              **Zara Red Temptation for Women** lasts throughout the day and
+              night.
+            </li>
+          </ul>
+        </div>
+
+        <div class="product-details">
+          <strong style="font-size: xx-large">Best times of consumption</strong>
+          <p>
+            The warm and sweet scent of **Zara Red Temptation for Women** makes
+            it particularly suitable for **cold seasons**, especially **autumn**
+            and **winter**. The blend of woody, musk, and vanilla notes makes it
+            an excellent choice for the colder days of the year. Additionally,
+            due to its sweet and alluring accords, this perfume is ideal for
+            **evenings** and **special occasions**.
+          </p>
+          <ul>
+            <li style="font-size: larger; line-height: 1.7rem">
+              <strong style="font-size: larger">Autumn and Winter:</strong> In
+              the colder seasons, this perfume, with its warm and sweet blends,
+              creates a luxurious and pleasant experience. The woody and musk
+              notes provide a sense of warmth and comfort during these seasons.
+            </li>
+            <li style="font-size: larger; line-height: 1.7rem">
+              <strong style="font-size: larger">Evenings and Parties:</strong>
+              This perfume is especially an excellent choice for evenings and
+              parties. The blend of sweet notes and soft floral accords,
+              combined with the depth of woody base notes, makes it perfect for
+              special events and enchanting nights.
+            </li>
+          </ul>
+        </div>
+        <div class="product-details">
+          <strong style="font-size: xx-large">Reasons to buy</strong>
+          <h2 style="color: rgb(188, 143, 27)">
+            1. A Seductive and Sweet Fragrance:
+          </h2>
+          <p>
+            This perfume, with its blend of fruity, floral, and woody notes,
+            conveys a sense of allure and charm. A scent that effortlessly sets
+            you apart and lingers in the memories of others.
+          </p>
+          <h2 style="color: rgb(188, 143, 27)">2. Long-Lasting Performance</h2>
+          <p>
+            The notes of musk, sandalwood, and vanilla in this perfume ensure
+            that its scent lasts throughout the day and night. This allows you
+            to enjoy its fragrance all day long without worrying about it
+            fading.
+          </p>
+          <h2 style="color: rgb(188, 143, 27)">
+            3. Perfect for Special Occasions:
+          </h2>
+          <p>
+            **Zara Red Temptation for Women** is especially designed for
+            evenings, parties, and other special occasions. This perfume helps
+            you stand out and appear impactful and captivating wherever you are.
+          </p>
+          <h2 style="color: rgb(188, 143, 27)">4. Affordable Price:</h2>
+          <p>
+            Unlike many similar perfumes in the market with comparable scents,
+            Zara Red Temptation Woman is available at an affordable price,
+            allowing you to enjoy a unique and luxurious fragrance without
+            overspending.
+          </p>
+        </div>
+        <div class="product-details">
+          <h1>Packaging</h1>
+          <p>
+            The packaging of this women's perfume, with its rectangular cuboid
+            design, showcases a unique charm of simplicity and elegance while
+            maintaining a modern look. The packaging's precise geometric shape
+            exudes a minimalist yet luxurious appearance, making it suitable for
+            women of all tastes and ages. The simple and unpretentious design,
+            paired with golden inscriptions, conveys a sense of grandeur and
+            authenticity.
+          </p>
+          <p>
+            The combination of soft, balanced colors evokes a sense of
+            tranquility and beauty, with every detail carefully and delicately
+            chosen to simultaneously create an impression of sophistication and
+            allure. This packaging not only serves as a delightful gift but also
+            stands out as a decorative element in any setting, making it an
+            ideal choice for women who seek beauty and simplicity alongside
+            functionality.
+          </p>
+          <h1 id="content">Purchase Method</h1>
+          <p>
+            If you're looking for a perfume with a seductive, sweet, and
+            long-lasting scent, **Zara Red Temptation for Women** will be an
+            excellent choice for you. To purchase this perfume at an affordable
+            price and with original quality, you can visit the
+            <strong style="color: #333; font-weight: bold">Royal website</strong
+            >. **Royal** provides authentic products and fast delivery, ensuring
+            a convenient and reliable shopping experience for you.
+          </p>
+          <p style="color: #333; font-weight: bold; font-size: 1.4rem">
+            We recommend trying this perfume and enjoying its unique and
+            impactful fragrance.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const imageContainer = document.getElementById("product-image-container");
+      const image = document.getElementById("product-image");
+
+      // Adjust the transform origin dynamically based on the cursor position
+      imageContainer.addEventListener("mousemove", (e) => {
+        const rect = imageContainer.getBoundingClientRect();
+        const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+        const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+        image.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+        image.style.transform = "scale(1.5)";
+      });
+
+      // Reset zoom when the mouse leaves the container
+      imageContainer.addEventListener("mouseleave", () => {
+        image.style.transform = "scale(1)";
+        image.style.transformOrigin = "center center";
+      });
+    </script>
+    <script>
+      // Select all elements that might contain bold syntax (**...**)
+      const contentElements = document.querySelectorAll(
+        "#content, .product-details li, .product-details p"
+      );
+
+      contentElements.forEach((element) => {
+        element.innerHTML = element.innerHTML.replace(
+          /\*\*(.*?)\*\*/g, // Match text between double asterisks
+          '<strong style="color: #333;">$1</strong>' // Replace with styled <strong>
+        );
+      });
+    </script>
+    <div id="footer"></div>
+    <script>
+      fetch("/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

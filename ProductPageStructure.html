@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Special Perfume</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+      }
+
+      /* Top Navigation Bar */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: #6a0dad;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        height: 50px;
+      }
+
+      .logo img {
+        height: 40px;
+        width: auto;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+      }
+
+      .nav-links a:hover {
+        color: #ffccff;
+      }
+
+      /* Product Page Layout */
+      .product-page {
+        display: flex;
+        align-items: flex-start;
+        max-width: 1200px;
+        margin: 50px auto;
+        gap: 80px;
+        margin-left: 45px;
+        margin-right: 45px;
+      }
+
+      /* Product Image Container */
+      .product-image-container {
+        position: sticky;
+        top: 120px;
+        transform: translateX(-100px);
+        transform: translateY(0px);
+        margin-left: 0px;
+        align-items: center;
+        flex: 1.2; /* Take up equal space on the left */
+        max-width: 50%;
+        height: auto;
+        overflow: hidden;
+        border-radius: 5%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+      }
+
+      .product-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.1s ease;
+      }
+      .product-name {
+        flex: 1;
+        padding: 20px;
+      }
+      .product-name p {
+        font-size: large;
+        color: goldenrod;
+        font-weight: bold;
+      }
+
+      /* Product Details */
+      .product-details {
+        flex: 1; /* Take up equal space on the right */
+        padding: 20px;
+      }
+
+      .product-details h1 {
+        color: #6a0dad;
+        margin-bottom: 20px;
+      }
+      .product-details h2 {
+        color: #6a0dad;
+        margin-bottom: 20px;
+      }
+      .product-details h3 {
+        font-weight: bold;
+        display: inline;
+      }
+      .product-details p {
+        font-size: 2rem;
+      }
+      .product-details strong {
+        color: #6a0dad;
+      }
+      .product-details li {
+        margin-bottom: 10px;
+        transform: translateX(-20px);
+      }
+      .product-details p {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .product-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgb(218, 168, 41);
+        margin-bottom: 20px;
+        margin-left: 10px;
+      }
+
+      /* Product Attributes */
+      .product-attributes {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+        margin-left: 30px;
+        margin-top: 30px;
+      }
+
+      .product-attributes li {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .product-attributes span {
+        font-weight: bold;
+        color: #6a0dad;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="logo">
+        <img
+          src="https://manashamim.ir/wp-content/uploads/2023/11/Mana-Shamim-Golsa-Logo-smal.png"
+          alt="Manashamim Logo"
+        />
+      </div>
+      <ul class="nav-links">
+        <li><a href="/Mana2.html">Home</a></li>
+        <li><a href="/products.html">Products</a></li>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Product Page Content -->
+    <div class="product-page">
+      <!-- Image with Dynamic Zoom Feature -->
+      <div class="product-image-container" id="product-image-container">
+        <img
+          src="https://via.placeholder.com/900x600"
+          alt="Special Perfume Image"
+          id="product-image"
+        />
+      </div>
+      <div class="product-details">
+        <p
+          style="
+            font-size: 36px;
+            font-weight: bold;
+            color: goldenrod;
+            margin-top: 20px;
+          "
+        >
+          Chanel Chance Royal Eau de Parfum For Women
+        </p>
+        <ul class="product-attributes">
+          <li style="margin-bottom: 15px"><span>Volume:</span> 8 ml</li>
+          <li style="margin-bottom: 15px"><span>Nature:</span> Cool</li>
+          <li style="margin-bottom: 15px"><span>Scent:</span> Sweet</li>
+          <li style="margin-bottom: 15px"><span>Longevity:</span> Excellent</li>
+          <li style="margin-bottom: 15px"><span>Diffusion:</span> Excellent</li>
+          <li style="margin-bottom: 10px">
+            <span>Suitable for:</span> Spring and Summer
+          </li>
+        </ul>
+        <p>
+          **Chanel Chance Royal for Women** is a sophisticated, elegant, and
+          modern edition of the classic **Chanel Chance** collection, introduced
+          by **Chanel** in 2024. This fragrance offers a unique blend of floral,
+          fruity, and woody notes, providing a sense of freshness and allure,
+          while remarkably drawing inspiration from **Chanel**'s classic scents.
+          **Chanel Chance Royal for Women** delivers a distinctive and luxurious
+          olfactory experience for women seeking an unparalleled fragrance
+          journey.
+        </p>
+        <h1>A breif History</h1>
+        <p>
+          **Chanel Chance** is one of the best-selling and popular collections
+          from the **Chanel** brand, first launched in 2002. This fragrance,
+          with its fresh and feminine scent, quickly gained a large following.
+          Later, **Chanel Chance Royal** was introduced as a new and luxurious
+          edition of the collection, offering a unique and captivating
+          experience to its fans.
+        </p>
+        <div class="details-container">
+          <p>
+            **Chanel Chance Royal for Women** features a blend of floral,
+            fruity, and woody notes that come together beautifully. It has a
+            gentle yet sophisticated fragrance that simultaneously conveys a
+            sense of joy and freshness. Here are the main notes of this perfume:
+          </p>
+
+          <h2>Fragrance Notes</h2>
+          <ul>
+            <li>
+              <strong>Top Notes:</strong> Bergamot, Pink Pepper, and Grapefruit
+            </li>
+            <li><strong>Middle Notes:</strong> Jasmine, Tuberose, and Peony</li>
+            <li><strong>Base Notes:</strong> Sandalwood, Amber, and Musk</li>
+          </ul>
+        </div>
+
+        <!-- Product Attributes -->
+
+        <div class="product-details">
+          <p>
+            At first, the combination of bergamot and grapefruit creates a sense
+            of freshness and vitality, quickly enhanced by pink pepper, adding a
+            slightly spicy and captivating touch to the fragrance. In the heart
+            notes, jasmine, tuberose, and peony bring a delicate and
+            sophisticated essence. Finally, in the base notes, sandalwood and
+            musk create a warm, woody, and aromatic scent, making the perfume
+            both long-lasting and impactful.
+          </p>
+        </div>
+        <div class="product-details">
+          <strong style="font-size: xx-large">Season Suitability</strong>
+          <p>
+            **Chanel Chance Royal for Women** is ideal for the warm seasons,
+            especially spring and summer. The floral and fruity notes of this
+            perfume create a sense of lightness and freshness during the warm
+            days of the year. With its blend of citrus notes at the top and
+            floral and woody aromas in the heart and base notes, it is an
+            excellent choice for bright and energetic days.
+          </p>
+          <p id="content">
+            The **Chanel Chance Royal for Women** perfume is also highly
+            suitable for spring and summer evenings, parties, friendly
+            gatherings, or any occasion where you want to wear an elegant and
+            captivating fragrance.
+          </p>
+        </div>
+        <div class="product-details">
+          <p id="content">
+            To purchase **Chanel Chance Royal for Women** at the best price with
+            fast delivery, visit the **Royal** online store. This perfume can be
+            your perfect companion for spring and summer days, parties, and any
+            special occasion where you want to shine and leave a lasting
+            impression.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const imageContainer = document.getElementById("product-image-container");
+      const image = document.getElementById("product-image");
+
+      // Adjust the transform origin dynamically based on the cursor position
+      imageContainer.addEventListener("mousemove", (e) => {
+        const rect = imageContainer.getBoundingClientRect();
+        const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+        const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+        image.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+        image.style.transform = "scale(1.5)";
+      });
+
+      // Reset zoom when the mouse leaves the container
+      imageContainer.addEventListener("mouseleave", () => {
+        image.style.transform = "scale(1)";
+        image.style.transformOrigin = "center center";
+      });
+    </script>
+    <script>
+      // Select all elements that might contain bold syntax (**...**)
+      const contentElements = document.querySelectorAll(
+        "#content, .product-details p"
+      );
+
+      contentElements.forEach((element) => {
+        element.innerHTML = element.innerHTML.replace(
+          /\*\*(.*?)\*\*/g, // Match text between double asterisks
+          '<strong style="color: #333;">$1</strong>' // Replace with styled <strong>
+        );
+      });
+    </script>
+    <div id="footer"></div>
+    <script>
+      fetch("/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

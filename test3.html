@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Design Page</title>
+    <style>
+      /* Global Styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      /* Navigation Bar */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .logo img {
+        width: 150px;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav-links li {
+        display: inline;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      /* Product Page Layout */
+      .product-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+      }
+
+      .product-image-container {
+        position: relative;
+        width: 700px;
+        height: 400px;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+
+      .product-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        position: absolute;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .product-image-container img.active {
+        opacity: 1;
+        position: relative;
+      }
+
+      .color-options {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      .color-options button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Product Details */
+      .product-details {
+        text-align: center;
+        margin: 30px 0;
+      }
+
+      .product-details h1 {
+        font-size: 28px;
+        color: #222;
+        margin-bottom: 15px;
+      }
+
+      .product-details p {
+        font-size: 18px;
+        line-height: 1.5;
+        color: #555;
+        margin-bottom: 20px;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #222;
+        color: #fff;
+        margin-top: 30px;
+      }
+
+      footer a {
+        text-decoration: none;
+        color: #ddd;
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="logo">
+        <img
+          src="https://manashamim.ir/wp-content/uploads/2023/11/Mana-Shamim-Golsa-Logo-smal.png"
+          alt="Logo"
+        />
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Product Page Content -->
+    <div class="product-page">
+      <!-- Product Image Section -->
+      <div class="product-image-container">
+        <img
+          src="https://via.placeholder.com/700x400/000000"
+          alt="Black Product"
+          class="active"
+          id="black-image"
+        />
+        <img
+          src="https://via.placeholder.com/700x400/FF0000"
+          alt="Red Product"
+          id="red-image"
+        />
+        <img
+          src="https://via.placeholder.com/700x400/0000FF"
+          alt="Blue Product"
+          id="blue-image"
+        />
+        <img
+          src="https://via.placeholder.com/700x400/FFFFFF"
+          alt="White Product"
+          id="white-image"
+        />
+      </div>
+
+      <!-- Color Options -->
+      <div class="color-options">
+        <button
+          style="background-color: black"
+          onclick="changeImage('black')"
+        ></button>
+        <button
+          style="background-color: red"
+          onclick="changeImage('red')"
+        ></button>
+        <button
+          style="background-color: blue"
+          onclick="changeImage('blue')"
+        ></button>
+        <button
+          style="background-color: white; border: 1px solid #ccc"
+          onclick="changeImage('white')"
+        ></button>
+      </div>
+
+      <!-- Product Details -->
+      <div class="product-details">
+        <h1>Special Perfume</h1>
+        <p>
+          Discover the perfect scent to match your personality. Explore our
+          range of perfumes that combine luxury with uniqueness.
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Special Perfume. All Rights Reserved.</p>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      function changeImage(color) {
+        const images = document.querySelectorAll(
+          ".product-image-container img"
+        );
+
+        // Remove active class from all images
+        images.forEach((img) => img.classList.remove("active"));
+
+        // Add active class to the selected image
+        const selectedImage = document.getElementById(`${color}-image`);
+        if (selectedImage) {
+          selectedImage.classList.add("active");
+        }
+      }
+    </script>
+  </body>
+</html>

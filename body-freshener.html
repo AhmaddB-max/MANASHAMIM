@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product 1</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      /* Top Navigation Bar */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: #6a0dad;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        height: 50px;
+      }
+
+      .logo img {
+        height: 40px;
+        width: auto;
+        max-width: 100%;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links li {
+        position: relative;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        display: block;
+      }
+
+      .nav-links a:hover {
+        color: #ffccff;
+      }
+
+      /* Product Page */
+      .product-page {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Product Image with Mouse-Based Zoom Feature */
+      .product-image-container {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        overflow: hidden;
+      }
+
+      .product-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        transform-origin: center center; /* Default center zoom */
+      }
+
+      .product-image-container:hover img {
+        transform: scale(2);
+      }
+
+      /* Product Details */
+      .product-details {
+        padding: 20px;
+      }
+
+      .product-details h1 {
+        color: #6a0dad;
+        margin-bottom: 20px;
+      }
+
+      .product-details p {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .product-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #6a0dad;
+        margin-bottom: 40px;
+      }
+
+      /* Reviews Section */
+      .reviews-section {
+        padding: 20px;
+        margin-top: 40px;
+        border-top: 1px solid #ddd;
+      }
+
+      .reviews-section h2 {
+        color: #6a0dad;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+      }
+
+      .review {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .review h3 {
+        margin-bottom: 5px;
+        font-size: 1.2rem;
+        color: #333;
+      }
+
+      .review p {
+        font-size: 1rem;
+        color: #666;
+      }
+
+      .review .stars {
+        color: #ffc107;
+        margin-bottom: 5px;
+      }
+
+      .review .date {
+        font-style: italic;
+        font-size: 0.9rem;
+        color: #888;
+      }
+
+      /* Interactive Star Ratings */
+      .star-rating {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 10px;
+      }
+
+      .star-rating i {
+        font-size: 1.5rem;
+        color: #ddd;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .star-rating i.active {
+        color: #ffc107;
+      }
+
+      /* Form for new reviews */
+      .add-review-form {
+        margin-top: 40px;
+      }
+
+      .add-review-form h3 {
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+        color: #6a0dad;
+      }
+
+      .add-review-form input,
+      .add-review-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      .add-review-form button {
+        background-color: #6a0dad;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .add-review-form button:hover {
+        background-color: #550b9c;
+      }
+
+      /* Show All/Show Less Buttons */
+      .show-all-reviews-button,
+      .show-less-reviews-button {
+        background-color: #6a0dad;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .show-all-reviews-button:hover,
+      .show-less-reviews-button:hover {
+        background-color: #550b9c;
+      }
+
+      .show-all-reviews,
+      .show-less-reviews-button {
+        display: none;
+      }
+
+      /* Popup Modal for Review Submission or Missing Fields */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 1001;
+      }
+
+      .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+      }
+
+      .modal-content h3 {
+        color: #6a0dad;
+        margin-bottom: 10px;
+      }
+
+      .modal-content p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+
+      .close-modal-btn {
+        background-color: #6a0dad;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .close-modal-btn:hover {
+        background-color: #550b9c;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="logo">
+        <img
+          src="https://manashamim.ir/wp-content/uploads/2023/11/Mana-Shamim-Golsa-Logo-smal.png"
+          alt="Manashamim Logo"
+        />
+      </div>
+      <ul class="nav-links">
+        <li><a href="Mana2.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Product Page Content -->
+    <div class="product-page">
+      <!-- Image with Mouse-Based Zoom Feature -->
+      <div class="product-image-container" id="product-image-container">
+        <img
+          src="https://via.placeholder.com/900x600"
+          alt="Product 1 Image"
+          id="product-image"
+          class="zoomed-image"
+        />
+      </div>
+
+      <div class="product-details">
+        <h1>Luxurious Hydrating Face Cream</h1>
+        <p>
+          This hydrating face cream is formulated with natural botanicals and
+          antioxidants to leave your skin feeling soft, smooth, and radiant. It
+          is designed to hydrate and rejuvenate your skin while providing a
+          glowing complexion. Suitable for all skin types and perfect for daily
+          use. Infused with vitamins and minerals to nourish and protect the
+          skin against environmental damage.
+        </p>
+        <div class="product-price">$45.00</div>
+      </div>
+
+      <!-- Reviews Section -->
+      <div class="reviews-section">
+        <h2>Customer Reviews</h2>
+
+        <!-- Top 5 Reviews will be displayed here -->
+        <div id="reviews-container"></div>
+
+        <!-- Button to show all reviews -->
+        <button
+          class="show-all-reviews-button"
+          id="show-all-btn"
+          onclick="showAllReviews()"
+        >
+          Show All Reviews
+        </button>
+        <button
+          class="show-less-reviews-button"
+          id="show-less-btn"
+          onclick="showLessReviews()"
+        >
+          Show Less
+        </button>
+
+        <!-- All reviews will be revealed here -->
+        <div id="all-reviews" class="show-all-reviews"></div>
+
+        <!-- Add a review form -->
+        <div class="add-review-form">
+          <h3>Leave a Review</h3>
+
+          <!-- Star rating input -->
+          <div class="star-rating" id="star-rating">
+            <i class="star" data-value="1">&#9733;</i>
+            <i class="star" data-value="2">&#9733;</i>
+            <i class="star" data-value="3">&#9733;</i>
+            <i class="star" data-value="4">&#9733;</i>
+            <i class="star" data-value="5">&#9733;</i>
+          </div>
+
+          <input
+            type="text"
+            id="reviewer-name"
+            placeholder="Your Name"
+            required
+          />
+          <textarea
+            id="review-content"
+            placeholder="Your Review"
+            rows="5"
+            required
+          ></textarea>
+          <button type="button" onclick="submitReview()">Submit Review</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div class="modal" id="reviewModal">
+      <div class="modal-content">
+        <h3 id="modal-header">Thank You!</h3>
+        <p id="modal-message">Your review has been successfully submitted.</p>
+        <button class="close-modal-btn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+
+    <script>
+      let reviews = [
+        {
+          name: "Emily R.",
+          stars: 4,
+          content:
+            "I love this cream! My skin feels soft and hydrated after just one use.",
+          date: "2024-10-20",
+        },
+        {
+          name: "John D.",
+          stars: 5,
+          content:
+            "Perfect for my dry skin. Been using it for weeks and my skin is glowing.",
+          date: "2024-10-18",
+        },
+        {
+          name: "Sophia L.",
+          stars: 4,
+          content: "Pricey but worth it! Makes my skin fresh and radiant.",
+          date: "2024-10-17",
+        },
+      ];
+
+      const starRating = document.getElementById("star-rating");
+      const reviewsContainer = document.getElementById("reviews-container");
+      const allReviewsContainer = document.getElementById("all-reviews");
+      const showAllBtn = document.getElementById("show-all-btn");
+      const showLessBtn = document.getElementById("show-less-btn");
+      let selectedStars = 0;
+
+      // Zoom on mouse hover with specific part focus
+      const productImageContainer = document.getElementById(
+        "product-image-container"
+      );
+      const productImage = document.getElementById("product-image");
+
+      productImageContainer.addEventListener("mousemove", function (e) {
+        const rect = productImageContainer.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        productImage.style.transformOrigin = `${x}% ${y}%`;
+      });
+
+      // Function to toggle the visibility and expand the search bar
+      function toggleSearchBar() {
+        const searchBar = document.getElementById("search-bar");
+        const crossIcon = document.getElementById("cross-icon");
+        const searchIcon = document.getElementById("search-icon");
+
+        searchBar.classList.add("active");
+        crossIcon.style.display = "inline-block"; // Show cross icon
+        searchIcon.style.display = "none"; // Hide search icon
+        searchBar.focus();
+      }
+
+      // Function to close the search bar using the cross icon
+      function closeSearchBar() {
+        const searchBar = document.getElementById("search-bar");
+        const crossIcon = document.getElementById("cross-icon");
+        const searchIcon = document.getElementById("search-icon");
+
+        searchBar.classList.remove("active");
+        crossIcon.style.display = "none"; // Hide cross icon after closing search
+        searchIcon.style.display = "inline-block"; // Show search icon
+      }
+
+      // Show the initial top 5 reviews
+      function displayReviews() {
+        reviewsContainer.innerHTML = "";
+        reviews.slice(0, 5).forEach((review) => {
+          const reviewElement = createReviewElement(review);
+          reviewsContainer.appendChild(reviewElement);
+        });
+
+        allReviewsContainer.innerHTML = "";
+        reviews.slice(5).forEach((review) => {
+          const reviewElement = createReviewElement(review);
+          allReviewsContainer.appendChild(reviewElement);
+        });
+      }
+
+      // Create the review HTML structure
+      function createReviewElement(review) {
+        const reviewDiv = document.createElement("div");
+        reviewDiv.classList.add("review");
+
+        const reviewHeader = document.createElement("h3");
+        reviewHeader.textContent = review.name + " ";
+        const reviewDate = document.createElement("span");
+        reviewDate.classList.add("date");
+        reviewDate.textContent = `(${review.date})`;
+
+        const reviewStars = document.createElement("div");
+        reviewStars.classList.add("stars");
+        reviewStars.textContent =
+          "★".repeat(review.stars) + "☆".repeat(5 - review.stars);
+
+        const reviewContent = document.createElement("p");
+        reviewContent.textContent = review.content;
+
+        reviewHeader.appendChild(reviewDate);
+        reviewDiv.appendChild(reviewHeader);
+        reviewDiv.appendChild(reviewStars);
+        reviewDiv.appendChild(reviewContent);
+
+        return reviewDiv;
+      }
+
+      // Handle star rating click
+      starRating.addEventListener("click", function (e) {
+        if (e.target.classList.contains("star")) {
+          selectedStars = e.target.dataset.value;
+          updateStarDisplay(selectedStars);
+        }
+      });
+
+      // Update the stars display
+      function updateStarDisplay(stars) {
+        document.querySelectorAll(".star").forEach((star, index) => {
+          if (index < stars) {
+            star.classList.add("active");
+          } else {
+            star.classList.remove("active");
+          }
+        });
+      }
+
+      // Submit a new review and show the modal
+      function submitReview() {
+        const name = document.getElementById("reviewer-name").value;
+        const content = document.getElementById("review-content").value;
+        const date = new Date().toISOString().split("T")[0];
+
+        if (!name || !content || selectedStars === 0) {
+          showModal(
+            "Error",
+            "Please fill out all fields and select a star rating."
+          );
+          return;
+        }
+
+        const newReview = {
+          name,
+          stars: parseInt(selectedStars),
+          content,
+          date,
+        };
+
+        reviews.unshift(newReview); // Add new review to the beginning
+        displayReviews(); // Refresh the review section
+
+        // Show the success modal
+        showModal("Thank You!", "Your review has been successfully submitted.");
+      }
+
+      // Show all reviews when the button is clicked
+      function showAllReviews() {
+        allReviewsContainer.style.display = "block";
+        showAllBtn.style.display = "none";
+        showLessBtn.style.display = "inline-block";
+      }
+
+      // Show less (top 5) reviews
+      function showLessReviews() {
+        allReviewsContainer.style.display = "none";
+        showLessBtn.style.display = "none";
+        showAllBtn.style.display = "inline-block";
+      }
+
+      // Show modal for success or error
+      function showModal(header, message) {
+        document.getElementById("modal-header").textContent = header;
+        document.getElementById("modal-message").textContent = message;
+        document.getElementById("reviewModal").style.display = "flex";
+      }
+
+      // Close the modal
+      function closeModal() {
+        document.getElementById("reviewModal").style.display = "none";
+      }
+
+      // Initial display
+      displayReviews();
+    </script>
+  </body>
+</html>

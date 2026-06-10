@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manashamim | Homepage</title>
+    <style>
+      @import url("Nav.css");
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      /* Top Navigation Bar */
+      
+
+      /* Slideshow Section */
+      .slideshow-container {
+        position: relative;
+        max-width: 100%;
+        height: 700px;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+
+      .slideshow-container img {
+        width: 100%;
+        height: 700px;
+        object-fit: cover;
+        display: none;
+      }
+
+      .slideshow-container img.active {
+        display: block;
+      }
+
+      /* Business Summary Section */
+      .business-summary {
+        position: relative;
+        padding: 50px 20px;
+        background-color: #f4f4f4;
+        margin-bottom: 40px;
+       text-align: justify;
+       line-height: 2rem;
+
+      }
+
+      .summary-content {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .summary-paragraph {
+        opacity: 0;
+        transform: translateY(100px);
+        transition: opacity 1s ease, transform 1s ease;
+        font-size: 1.2em;
+        color: #333;
+        margin-bottom: 50px;
+        margin-right: 30px;
+      }
+    
+
+      .summary-paragraph.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .summary-paragraph2{
+        opacity: 0;
+        transform: translateY(100px);
+        transition: opacity 1s ease, transform 1s ease;
+        font-size: 1.2em;
+        color: #333;
+        margin-bottom: 20px;
+        margin-right: 30px;
+      }
+      .summary-paragraph2.visible{
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Main Layout */
+      .main-section {
+        display: flex;
+        max-width: 1400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        gap: 20px;
+      }
+
+      /* Left - Special Product */
+      .special-product {
+        width: 40%;
+        position: -webkit-sticky; /* Sticky behavior */
+        position: sticky;
+        top: 90px;
+        align-self: flex-start;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .special-product-inner {
+        position: relative;
+        width: 100%;
+        background-color: #fff;
+        border-radius: 12px;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .special-product-inner img {
+        width: 95%;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+
+      .new-in-label {
+        position: absolute;
+        top: 30px;
+        left: 25px;
+        font-size: 3rem;
+        font-weight: bold;
+        color: #6a0dad;
+      }
+
+      .shop-now-btn {
+        background-color: #6a0dad;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-top: 15px;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .shop-now-btn:hover {
+        background-color: #5b0da6;
+      }
+
+      /* Right - Products Grid */
+      .products-container {
+        width: 60%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      /* Product Card */
+      .product-card {
+        background-color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        height: 320px;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .product-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .product-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Name & Price inside Image */
+      .product-card h3,
+      .product-card .price {
+        position: absolute;
+        color: white;
+        font-size: 1.3rem;
+        font-weight: bold;
+        z-index: 2;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+      }
+
+      .product-card h3 {
+        bottom: 40px;
+        left: 20px;
+        font-size: 1.5rem;
+      }
+
+      .product-card .price {
+        bottom: 20px;
+        left: 20px;
+        font-size: 1.3rem;
+      }
+      .horizontal-gallery-GIGA{
+        max-width: 15000px;
+      }
+      /* Horizontal gellary*/
+      .horizontal-gallery-section {
+        width: 100%;
+        overflow: hidden; /* Hide products outside the view */
+        border: 1px solid #ccc;
+        margin: 20px 0;
+        position: relative;
+      }
+
+      .horizontal-product-list {
+        display: flex;
+        width: max-content; /* Allow horizontal overflow */
+        transition: all 0.2s linear; /* Add transition for smooth scrolling */
+      }
+
+      .horizontal-product {
+        min-width: 250px; /* Width of each product */
+        height: 300px; /* Set a fixed height */
+        margin-right: 20px;
+        background-color: #fff;
+        position: relative; /* For overlaying text */
+        overflow: hidden;
+        border-radius: 12px;
+        transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth transition for hover effect */
+      }
+
+      .horizontal-product img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: transform 0.4s ease; /* Smooth zoom effect on hover */
+      }
+
+      .horizontal-product h3 {
+        position: absolute;
+        bottom: 10px; /* Position text at the bottom of the product */
+        left: 10px;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Add shadow for better visibility */
+        z-index: 2;
+        margin: 0;
+      }
+
+      .horizontal-product:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .horizontal-product:hover img {
+        transform: scale(1.1); /* Slight zoom effect on image */
+      }
+
+      /* Partner Logo Section */
+      .partner-logos-section {
+        background-color: #f4f4f4;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .partner-logos {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin: 20px auto;
+        max-width: 1000px;
+      }
+
+      .partner-logos img {
+        width: 50px;
+        height: auto;
+        transition: transform 0.3s ease;
+      }
+
+      .partner-logos img:hover {
+        transform: scale(1.1);
+      }
+
+      @media screen and (max-width: 768px) {
+        .main-section {
+          flex-direction: column;
+        }
+
+        .special-product {
+          width: 100%;
+          position: relative;
+        }
+
+        .products-container {
+          grid-template-columns: 1fr;
+          width: 100%;
+        }
+
+        .partner-logos img {
+          width: 80px;
+        }
+      }
+      footer {
+      background-color: #6a0dad;
+      color: white;
+      padding: 40px 20px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo img {
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    .footer-section {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .footer-column h4 {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 5px;
+    }
+
+    .footer-column ul li a {
+      text-decoration: none;
+      color: white;
+      transition: color 0.3s ease;
+    }
+
+    .footer-column ul li a:hover {
+      color: #ffccff;
+    }
+
+    .footer-social {
+      margin-top: 20px;
+    }
+
+    .footer-social a {
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      color: #ffccff;
+    }
+    
+
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="logo">
+        <a href="Mana2.html"
+          ><img
+            src="https://manashamim.ir/wp-content/uploads/2023/11/Mana-Shamim-Golsa-Logo-smal.png"
+            alt="Manashamim Logo"
+        /></a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="Mana2.html">Home</a></li>
+        <li class="dropdown">
+          <a href="Products.html">Products</a>
+        </li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Slideshow Section -->
+    <div class="slideshow-container">
+      <img
+        class="slider-image active"
+        src="https://manashamim.com/wp-content/uploads/2024/10/s1-1024x485.jpg"
+        alt="Business Image 1"
+      />
+      <img
+        class="slider-image"
+        src="https://manashamim.com/wp-content/uploads/2024/10/20-1024x485.jpg"
+        alt="Business Image 2"
+      />
+      <img
+        class="slider-image"
+        src="https://manashamim.com/wp-content/uploads/2024/10/21-1024x486.jpg"
+        alt="Business Image 3"
+      />
+      <img
+        class="slider-image"
+        src="https://manashamim.com/wp-content/uploads/2024/10/s11-1024x486.jpg"
+        alt="Business Image 4"
+      />
+    </div>
+
+    <!-- Business Summary Section -->
+    <section class="business-summary">
+      <div class="summary-content">
+        
+<p style="font-family: 'Times New Roman', Times, serif;" class="summary-paragraph">
+  Mana Shamim Company was founded in 2021 through the collaboration of experienced and specialized managers, with a vision to redefine quality and innovation in the cosmetic and hygiene industry. From the outset, the company has been committed to producing a diverse range of products that meet the highest global standards. Situated in the Eshtehard Industrial Zone, Mana Shamim operates a state-of-the-art manufacturing facility equipped with multiple production lines, enabling it to deliver premium-quality products at scale. This strategic location not only ensures seamless operations but also allows the company to serve both domestic and international markets efficiently.
+        <p style="font-family: 'Times New Roman', Times, serif;" class="summary-paragraph">
+          The company boasts a broad and diverse portfolio of products that cater to various customer needs. These include air fresheners that create refreshing and aromatic environments, body sprays designed for personal care and comfort, hair hygiene sprays to support scalp health, and high-quality colognes to complete the grooming experience. By focusing on innovation and variety, Mana Shamim has positioned itself as a leader in the industry, meeting the dynamic preferences of its customers. These products are crafted with a meticulous approach, ensuring they stand out in terms of quality, design, and performance.
+
+        </p></br>
+        <p style="font-family: 'Times New Roman', Times, serif;" class="summary-paragraph">
+          A significant aspect of Mana Shamim’s vision is to support local markets while simultaneously expanding its footprint beyond borders. The company actively addresses domestic needs by offering high-quality products at competitive prices, thereby reducing dependency on imports. Moreover, its focus on export markets, particularly in neighboring countries, reflects its ambition to establish itself as a prominent regional player. By leveraging its strategic location and robust production capabilities, Mana Shamim has successfully created a niche for itself in the competitive global marketplace.
+        </p>
+        <p style="font-family: 'Times New Roman', Times, serif;" class="summary-paragraph">The company's success is rooted in its unwavering commitment to excellence in every step of the production process. Mana Shamim uses high-grade raw materials sourced from trusted suppliers in Iran, Turkey, and Spain to ensure consistent product quality. It also relies on a team of highly skilled and experienced professionals who bring expertise and innovation to the table. By adhering to strict managerial and operational standards, the company has been able to achieve remarkable growth in a relatively short span of time. These principles have enabled Mana Shamim to maintain a competitive edge while fostering a culture of innovation and reliability.</p>
+     <p style="font-family: 'Times New Roman', Times, serif;" class="summary-paragraph">To date, Mana Shamim has set an impressive production record of manufacturing 1.5 million sprays per month, a milestone that underscores its operational efficiency and market demand. The company is constantly evolving, with ongoing efforts to expand its production capacity and develop new product lines. By combining innovation, sustainability, and a commitment to quality, Mana Shamim aims to further solidify its position as a trusted name in the cosmetic and hygiene industry. The company’s journey is a testament to its vision of delivering excellence while contributing to the growth of the regional and global markets.
+    </p>
+      </div>
+    </section>
+
+    <!-- Main Content Layout -->
+    <section class="main-section">
+      <!-- Special Product on the Left -->
+      <div class="special-product">
+        <div class="special-product-inner">
+          <span class="new-in-label">NEW IN</span>
+          <img
+            src="https://via.placeholder.com/500x600"
+            alt="Special Product"
+          />
+          <a href="#" class="shop-now-btn">Shop Now</a>
+        </div>
+      </div>
+
+      <!-- Right-Side Products Grid -->
+      <div class="products-container">
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="Perfume" /></a>
+          <h3>Perfume</h3>
+        </div>
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="Cologne" /></a>
+          <h3>Cologne</h3>
+        </div>
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="Body Freshener Spray" /></a>
+          <h3>Body Freshener Spray</h3>
+        </div>
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="Air Freshener Spray" /></a>
+          <h3>Air Freshener Spray</h3>
+        </div>
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="Camping Gas Spray" /></a>
+          <h3>Camping Gas Spray</h3>
+        </div>
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="Lighter Gas Spray" /></a>
+          <h3>Lighter Gas Spray</h3>
+        </div>
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="Engine Cleaner" /></a>
+          <h3>Engine Cleaner</h3>
+        </div>
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="WD-40" /></a>
+          <h3>WD-40</h3>
+        </div>
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="Tire Foam" /></a>
+          <h3>Tire Foam</h3>
+        </div>
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="Tire Wax" /></a>
+          <h3>Tire Wax</h3>
+        </div>
+        <div class="product-card">
+          <a href="#"><img src="https://via.placeholder.com/400x320" alt="Happy Snow" /></a>
+          <h3>Happy Snow</h3>
+        </div>
+      </div>
+    
+    </section>
+    <section class="horizontal-gallery-GIGA">
+      <div class="horizontal-gallery-section" id="productListContainer">
+        <div class="horizontal-product-list" id="productList">
+          <!-- Original Product List -->
+          <div class="horizontal-product">
+            <img src="https://via.placeholder.com/300x200" alt="Product 1" />
+            <h3>Product 1</h3>
+          </div>
+          <div class="horizontal-product">
+            <img src="https://via.placeholder.com/300x200" alt="Product 2" />
+            <h3>Product 2</h3>
+          </div>
+          <div class="horizontal-product">
+            <img src="https://via.placeholder.com/300x200" alt="Product 3" />
+            <h3>Product 3</h3>
+          </div>
+          <div class="horizontal-product">
+            <img src="https://via.placeholder.com/300x200" alt="Product 4" />
+            <h3>Product 4</h3>
+          </div>
+          <div class="horizontal-product">
+            <img src="https://via.placeholder.com/300x200" alt="Product 5" />
+            <h3>Product 5</h3>
+          </div>
+          <div class="horizontal-product">
+            <img src="https://via.placeholder.com/300x200" alt="Product 6" />
+            <h3>Product 6</h3>
+          </div>
+          <div class="horizontal-product">
+            <img src="https://via.placeholder.com/300x200" alt="Product 7" />
+            <h3>Product 7</h3>
+          </div>
+          <div class="horizontal-product">
+            <img src="https://via.placeholder.com/300x200" alt="Product 8" />
+            <h3>Product 8</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <div id="footer"></div>
+    <script>
+      fetch("/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+    </section>
+
+    
+
+    <!-- Slideshow Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const slideshowImages = document.querySelectorAll(
+          ".slideshow-container img"
+        );
+        let currentIndex = 0;
+
+        function changeSlide() {
+          slideshowImages[currentIndex].classList.remove("active");
+          currentIndex = (currentIndex + 1) % slideshowImages.length;
+          slideshowImages[currentIndex].classList.add("active");
+        }
+
+        setInterval(changeSlide, 4000); // Change every 4 seconds
+
+        // Scroll animation for paragraphs
+        const summaryParagraphs =
+          document.querySelectorAll(".summary-paragraph");
+
+        function handleScroll() {
+          summaryParagraphs.forEach((paragraph) => {
+            const rect = paragraph.getBoundingClientRect();
+            if (rect.top <= window.innerHeight - 100 && rect.bottom >= 0) {
+              paragraph.classList.add("visible");
+            } else {
+              paragraph.classList.remove("visible");
+            }
+          });
+          setInterval(handleScroll, 1400);
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        handleScroll(); // Trigger animation on load
+      });
+    </script>
+ <!-- Horizontal Gallery Script -->
+ <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const productListContainer = document.getElementById(
+      "productListContainer"
+    );
+    const productList = document.getElementById("productList");
+    let scrollSpeed = 1; // Scroll speed
+    let isUserScrolling = false;
+
+    // Function for continuous scrolling
+    function continuousScroll() {
+      if (!isUserScrolling) {
+        productListContainer.scrollLeft += scrollSpeed;
+
+        // Check if the first product is out of view
+        const firstProduct = productList.children[0];
+        const productWidth = firstProduct.getBoundingClientRect().width;
+
+        if (firstProduct.getBoundingClientRect().right <= 0) {
+          productList.appendChild(firstProduct); // Move first product to the end
+          productListContainer.scrollLeft -= productWidth; // Adjust scroll position
+        }
+      }
+
+      requestAnimationFrame(continuousScroll);
+    }
+
+    // Start continuous scrolling
+    continuousScroll();
+
+    // Slow down scrolling speed on hover
+    productListContainer.addEventListener("mouseenter", () => {
+      scrollSpeed = 0.5; // Slow down the speed when hovered
+    });
+
+    // Resume normal scrolling speed when leaving hover
+    productListContainer.addEventListener("mouseleave", () => {
+      scrollSpeed = 1; // Resume normal speed
+    });
+  });
+</script>
+  </body>
+</html>

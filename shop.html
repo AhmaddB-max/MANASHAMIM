@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop | Royal - Mana Shamim Golsa</title>
+    <link rel="icon" href="https://manashamim.ir/wp-content/uploads/2023/11/Mana-Shamim-Golsa-Logo-smal.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              royal: { DEFAULT: "#6a0dad", dark: "#8b008b", gold: "#daa829" },
+            },
+            fontFamily: {
+              serif: ['"Times New Roman"', "Times", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="shop" class="bg-gray-50 text-gray-800">
+    <div id="site-header"></div>
+
+    <!-- Page header -->
+    <section class="bg-gradient-to-r from-royal to-royal-dark py-12 text-center text-white">
+      <h1 class="text-3xl font-bold sm:text-4xl" data-i18n="shop_title"></h1>
+      <p class="mt-2 text-sm text-purple-100 sm:text-base" data-i18n="shop_subtitle"></p>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-8 lg:flex-row">
+
+        <!-- ============== Sidebar (categories) ============== -->
+        <aside class="lg:w-64 lg:shrink-0">
+          <button id="filter-toggle" type="button"
+            class="mb-4 flex w-full items-center justify-between rounded-lg bg-white px-4 py-3 text-sm font-semibold text-royal shadow ring-1 ring-gray-100 lg:hidden">
+            <span data-i18n="categories"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+
+          <div id="filter-panel" class="hidden rounded-xl bg-white p-4 shadow ring-1 ring-gray-100 lg:block lg:sticky lg:top-24">
+            <h2 class="mb-3 text-sm font-bold uppercase tracking-wide text-royal" data-i18n="categories"></h2>
+            <ul id="category-list" class="space-y-1 text-sm"></ul>
+          </div>
+        </aside>
+
+        <!-- ============== Main content ============== -->
+        <div class="flex-1">
+          <!-- Search + sort bar -->
+          <div class="mb-6 flex flex-col gap-3 rounded-xl bg-white p-4 shadow ring-1 ring-gray-100 sm:flex-row sm:items-center sm:justify-between">
+            <div class="relative w-full sm:max-w-xs">
+              <input type="search" id="shop-search-input" data-i18n-placeholder="search_placeholder"
+                class="w-full rounded-full border border-gray-200 px-4 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+              <svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 rtl:right-auto rtl:left-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/></svg>
+            </div>
+            <div class="flex items-center gap-2">
+              <label for="sort-select" class="shrink-0 text-sm font-medium text-gray-600" data-i18n="sort_label"></label>
+              <select id="sort-select" class="rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal">
+                <option value="newest" data-i18n="sort_newest"></option>
+                <option value="price-low" data-i18n="sort_price_low"></option>
+                <option value="price-high" data-i18n="sort_price_high"></option>
+                <option value="name-az" data-i18n="sort_name_az"></option>
+              </select>
+            </div>
+          </div>
+
+          <p id="results-count" class="mb-4 text-sm text-gray-500"></p>
+
+          <div id="product-grid" class="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 xl:grid-cols-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <div id="site-footer"></div>
+
+    <!-- Scripts -->
+    <script src="js/i18n.js"></script>
+    <script src="data/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/product-render.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/shop.js"></script>
+  </body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout | Royal - Mana Shamim Golsa</title>
+    <link rel="icon" href="https://manashamim.ir/wp-content/uploads/2023/11/Mana-Shamim-Golsa-Logo-smal.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              royal: { DEFAULT: "#6a0dad", dark: "#8b008b", gold: "#daa829" },
+            },
+            fontFamily: {
+              serif: ['"Times New Roman"', "Times", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="checkout" class="bg-gray-50 text-gray-800">
+    <div id="site-header"></div>
+
+    <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+      <h1 class="mb-8 text-3xl font-bold text-royal" data-i18n="checkout_title"></h1>
+
+      <!-- Empty cart -->
+      <div id="checkout-empty" class="hidden flex-col items-center gap-4 rounded-2xl bg-white py-20 text-center shadow ring-1 ring-gray-100">
+        <p class="text-lg font-bold text-gray-700" data-i18n="checkout_empty_cart"></p>
+        <a href="shop.html" data-i18n="cart_continue_shopping"
+          class="mt-2 rounded-full bg-royal px-6 py-2.5 text-sm font-bold text-white shadow transition hover:bg-royal-dark"></a>
+      </div>
+
+      <!-- Checkout form -->
+      <div id="checkout-form-wrapper" class="hidden flex-col gap-8 lg:flex-row">
+        <form id="checkout-form" class="flex-1 space-y-8" novalidate>
+          <!-- Contact info -->
+          <div class="rounded-2xl bg-white p-6 shadow ring-1 ring-gray-100">
+            <h2 class="mb-4 text-lg font-bold text-royal" data-i18n="checkout_contact_info"></h2>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div class="sm:col-span-2">
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_full_name"></label>
+                <input type="text" name="fullName" required class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_required"></p>
+              </div>
+              <div>
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_email"></label>
+                <input type="email" name="email" required class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_invalid_email"></p>
+              </div>
+              <div>
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_phone"></label>
+                <input type="tel" name="phone" required class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_required"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shipping address -->
+          <div class="rounded-2xl bg-white p-6 shadow ring-1 ring-gray-100">
+            <h2 class="mb-4 text-lg font-bold text-royal" data-i18n="checkout_shipping_address"></h2>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div class="sm:col-span-2">
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_address"></label>
+                <input type="text" name="address" required class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_required"></p>
+              </div>
+              <div>
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_city"></label>
+                <input type="text" name="city" required class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_required"></p>
+              </div>
+              <div>
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_postal_code"></label>
+                <input type="text" name="postalCode" required class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_required"></p>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_country"></label>
+                <input type="text" name="country" required class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_required"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment method -->
+          <div class="rounded-2xl bg-white p-6 shadow ring-1 ring-gray-100">
+            <h2 class="mb-4 text-lg font-bold text-royal" data-i18n="checkout_payment_method"></h2>
+
+            <div class="space-y-3">
+              <label class="flex cursor-pointer items-center gap-3 rounded-lg border border-gray-200 p-3 transition has-[:checked]:border-royal has-[:checked]:ring-1 has-[:checked]:ring-royal">
+                <input type="radio" name="paymentMethod" value="card" checked class="h-4 w-4 accent-royal" />
+                <span class="text-sm font-semibold" data-i18n="checkout_credit_card"></span>
+              </label>
+              <label class="flex cursor-pointer items-center gap-3 rounded-lg border border-gray-200 p-3 transition has-[:checked]:border-royal has-[:checked]:ring-1 has-[:checked]:ring-royal">
+                <input type="radio" name="paymentMethod" value="paypal" class="h-4 w-4 accent-royal" />
+                <span class="text-sm font-semibold" data-i18n="checkout_paypal"></span>
+              </label>
+              <label class="flex cursor-pointer items-center gap-3 rounded-lg border border-gray-200 p-3 transition has-[:checked]:border-royal has-[:checked]:ring-1 has-[:checked]:ring-royal">
+                <input type="radio" name="paymentMethod" value="cod" class="h-4 w-4 accent-royal" />
+                <span class="text-sm font-semibold" data-i18n="checkout_cod"></span>
+              </label>
+            </div>
+
+            <!-- Card fields -->
+            <div id="card-fields" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div class="sm:col-span-2">
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_name_on_card"></label>
+                <input type="text" name="cardName" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_required"></p>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_card_number"></label>
+                <input type="text" name="cardNumber" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_invalid_card"></p>
+              </div>
+              <div>
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_expiry"></label>
+                <input type="text" name="cardExpiry" placeholder="MM/YY" maxlength="5" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_invalid_expiry"></p>
+              </div>
+              <div>
+                <label class="mb-1 block text-sm font-medium text-gray-700" data-i18n="checkout_cvv"></label>
+                <input type="text" name="cardCvv" inputmode="numeric" maxlength="4" placeholder="123" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-royal focus:outline-none focus:ring-1 focus:ring-royal" />
+                <p class="error-msg mt-1 hidden text-xs text-red-500" data-i18n="checkout_invalid_cvv"></p>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" data-i18n="checkout_place_order"
+            class="w-full rounded-full bg-royal px-6 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-royal-dark lg:hidden"></button>
+        </form>
+
+        <!-- Order summary -->
+        <div class="lg:w-96 lg:shrink-0">
+          <div class="sticky top-24 rounded-2xl bg-white p-6 shadow ring-1 ring-gray-100">
+            <h2 class="mb-4 text-lg font-bold text-royal" data-i18n="checkout_order_summary"></h2>
+            <div id="checkout-items" class="max-h-72 space-y-3 overflow-y-auto pr-1"></div>
+            <div class="mt-4 space-y-2 border-t border-gray-100 pt-4 text-sm">
+              <div class="flex justify-between">
+                <span data-i18n="cart_subtotal"></span>
+                <span id="checkout-subtotal" class="font-semibold"></span>
+              </div>
+              <div class="flex justify-between text-gray-500">
+                <span data-i18n="cart_shipping"></span>
+                <span id="checkout-shipping"></span>
+              </div>
+            </div>
+            <div class="mt-4 flex justify-between border-t border-gray-200 pt-4 text-base font-bold text-royal">
+              <span data-i18n="cart_total"></span>
+              <span id="checkout-total"></span>
+            </div>
+            <button type="submit" form="checkout-form" data-i18n="checkout_place_order"
+              class="mt-6 hidden w-full rounded-full bg-royal px-6 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-royal-dark lg:block"></button>
+            <a href="cart.html" data-i18n="checkout_back_to_cart" class="mt-3 block text-center text-sm font-semibold text-gray-500 hover:text-royal"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order confirmation -->
+      <div id="order-confirmation" class="hidden flex-col items-center gap-4 rounded-2xl bg-white py-16 text-center shadow ring-1 ring-gray-100">
+        <div class="flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 class="text-2xl font-bold text-royal" data-i18n="order_success_title"></h2>
+        <p class="max-w-md text-sm text-gray-600">
+          <span data-i18n="order_success_message"></span>
+          <span id="order-number" class="font-bold text-royal-gold"></span>
+        </p>
+        <p class="mx-auto max-w-lg rounded-lg bg-purple-50 p-4 text-xs text-gray-500" data-i18n="order_success_note"></p>
+        <div class="mt-2 flex flex-col gap-3 sm:flex-row">
+          <a href="index.html" data-i18n="order_back_home" class="rounded-full border-2 border-royal px-6 py-2.5 text-sm font-bold text-royal transition hover:bg-royal hover:text-white"></a>
+          <a href="shop.html" data-i18n="order_continue_shopping" class="rounded-full bg-royal px-6 py-2.5 text-sm font-bold text-white shadow transition hover:bg-royal-dark"></a>
+        </div>
+      </div>
+    </section>
+
+    <div id="site-footer"></div>
+
+    <!-- Scripts -->
+    <script src="js/i18n.js"></script>
+    <script src="data/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/product-render.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/checkout.js"></script>
+  </body>
+</html>

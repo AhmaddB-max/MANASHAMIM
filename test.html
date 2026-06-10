@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us</title>
+    <style>
+      @import url("Nav.css");
+      @import url("/SlideShow.css");
+
+      body {
+        font-family: "Times New Roman", Times, serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
+
+      /* Top Navigation Bar */
+
+      /* Main About Us Section */
+      .about-us-container {
+        max-width: max-content;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+      }
+
+      .about-us-title {
+        text-align: center;
+        color: #6a0dad;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .about-us-text {
+        text-align: center;
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Catalog Section */
+      .catalog-section {
+        margin-top: 60px;
+      }
+
+      .catalog-title {
+        text-align: center;
+        color: #6a0dad;
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      .catalog-description {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 40px;
+      }
+
+      /* Catalog Grid (similar to product cards) */
+      .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .catalog-item {
+        position: relative;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        width: 250px;
+        height: 350px; /* Fixed size for the catalog items */
+      }
+
+      .catalog-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .catalog-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .catalog-item h3 {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+      }
+
+      /* Call to Action Section */
+      .cta-section {
+        background-color: #f4f4f4;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .cta-title {
+        color: #6a0dad;
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      .cta-btn {
+        background-color: #6a0dad;
+        color: white;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .cta-btn:hover {
+        background-color: #550b9c;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="logo">
+        <img
+          src="https://manashamim.ir/wp-content/uploads/2023/11/Mana-Shamim-Golsa-Logo-smal.png"
+          alt="Manashamim Logo"
+        />
+      </div>
+      <ul class="nav-links">
+        <li><a href="Mana2.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="slideshow-container">
+      <img
+        class="slider-image active"
+        src="/BackGrounds/Contact.jpg"
+        alt="Business Image 1"
+      />
+    </div>
+    <!-- About Us Container -->
+    <div class="about-us-container">
+      <h1 class="about-us-title">About Us</h1>
+      <p class="about-us-text">
+        Welcome to Manashamim, a leading innovator in the world of sprays. From
+        industrial essentials like WD-40 to the delight of festive sprays like
+        Happy Snow, we cover every need with precision and excellence. Our
+        expertise extends to the art of fine perfumes, crafting luxurious
+        fragrances that leave a lasting impression.
+        <br /><br />
+        Established with a vision to create versatile, high-quality sprays,
+        Manashamim has become a trusted name across various industries. Whether
+        it’s for maintenance, celebration, or personal care, our products are
+        designed to deliver reliability and satisfaction. Innovation,
+        sustainability, and customer care are at the heart of everything we do,
+        ensuring that every spray we produce reflects our commitment to
+        excellence.
+      </p>
+
+      <!-- Catalogs Section -->
+      <section class="catalog-section">
+        <h2 class="catalog-title">Our Catalogs</h2>
+        <p class="catalog-description">
+          Discover more about our products and their applications by exploring
+          our detailed catalogs below. Click on any catalog to download the PDF.
+        </p>
+
+        <!-- Catalog Grid -->
+        <div class="catalog-grid">
+          <!-- Catalog 1 -->
+          <a
+            href="/CatalogList/CATALOG ENGLISH COLOGNE.pdf"
+            download="Cologne Catalog"
+            class="catalog-item"
+          >
+            <img src="https://via.placeholder.com/250x300" alt="Catalog 1" />
+            <h3>Colognes</h3>
+          </a>
+
+          <!-- Catalog 2 -->
+          <a
+            href="/CatalogList/CATALOG ENGLISH INJECTOR.pdf"
+            download="Injector Cleaner Catalog"
+            class="catalog-item"
+          >
+            <img src="https://via.placeholder.com/250x300" alt="Catalog 2" />
+            <h3>Injector Cleaner</h3>
+          </a>
+
+          <!-- Catalog 3 -->
+          <a
+            href="/CatalogList/CATALOG ENGLISH TIRE WAX.pdf"
+            download="Tire Wax Catalog"
+            class="catalog-item"
+          >
+            <img src="https://via.placeholder.com/250x300" alt="Catalog 3" />
+            <h3>Tire Wax</h3>
+          </a>
+
+          <!-- Catalog 4 -->
+          <a
+            href="/CatalogList/CATALOG ENGLISH WD40.pdf"
+            download="WD-40 Catalog"
+            class="catalog-item"
+          >
+            <img src="https://via.placeholder.com/250x300" alt="Catalog 4" />
+            <h3>WD-40</h3>
+          </a>
+
+          <!-- Catalog 5 -->
+          <a
+            href="/CatalogList/CATALOG ENGLISH PERFUMES.pdf"
+            download="Perfume Catalog"
+            class="catalog-item"
+          >
+            <img src="https://via.placeholder.com/250x300" alt="Catalog 5" />
+            <h3>Perfumes</h3>
+          </a>
+
+          <!-- Catalog 6 -->
+          <a
+            href="/CatalogList/CATALOG ENGLISSH CAMPING GAS.pdf"
+            download="Camping Gas Catalog"
+            class="catalog-item"
+          >
+            <img src="https://via.placeholder.com/250x300" alt="Catalog 6" />
+            <h3>Camping Gas</h3>
+          </a>
+
+          <!-- Catalog 7 -->
+          <a
+            href="/CatalogList/CATALOG ENGLISH AIR FRESHENER.pdf"
+            download="Air Freshener Catalog"
+            class="catalog-item"
+          >
+            <img src="https://via.placeholder.com/250x300" alt="Catalog 7" />
+            <h3>Air Fresheners</h3>
+          </a>
+
+          <!-- Catalog 8 -->
+          <a
+            href="/CatalogList/CATALOG ENGLISH FOAM TIRE.pdf"
+            download="Foam Tire Catalog"
+            class="catalog-item"
+          >
+            <img src="https://via.placeholder.com/250x300" alt="Catalog 8" />
+            <h3>Foam Tire</h3>
+          </a>
+
+          <!-- Catalog 9 -->
+          <a
+            href="/CatalogList/CATALOG ENGLISH LIGHTER GAS.pdf"
+            download="Lighter Gas Catalog"
+            class="catalog-item"
+          >
+            <img src="https://via.placeholder.com/250x300" alt="Catalog 9" />
+            <h3>Lighter Gas</h3>
+          </a>
+
+          <!-- Catalog 10 -->
+          <a
+            href="/CatalogList/CATALOG ENGLISH SPRAY SNOW.pdf"
+            download="Happy Snow Catalog"
+            class="catalog-item"
+          >
+            <img src="https://via.placeholder.com/250x300" alt="Catalog 10" />
+            <h3>Happy Snow</h3>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div id="footer"></div>
+    <script>
+      fetch("/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

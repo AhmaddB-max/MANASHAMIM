@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products | Manashamim</title>
+    <style>
+      @import url("Nav.css");
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+        color: #333;
+        scroll-behavior: smooth;
+      }
+
+      /* Top Navigation Bar */
+
+      /* Search Container */
+      .search-container {
+        position: sticky;
+        display: flex;
+        align-items: center;
+        max-width: 400px;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .search-bar {
+        padding: 10px 15px;
+        font-size: 1rem;
+        border: 2px solid transparent;
+        border-radius: 30px;
+        width: 100%;
+        background-color: #6a0dad;
+        transition: all 0.3s ease;
+        outline: none;
+      }
+
+      .search-bar:focus {
+        border-color: #6a0dad;
+        background-color: #f9f9f9;
+      }
+
+      .search-bar::placeholder {
+        color: #aaa;
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 15px;
+        cursor: pointer;
+        font-size: 20px;
+        color: #6a0dad;
+      }
+
+      /* Autocomplete Dropdown */
+      /* Autocomplete Dropdown */
+      .autocomplete-list {
+        position: absolute; /* Ensures the list is positioned relative to the search bar */
+        top: 110%;
+        left: 0;
+        width: 100%; /* Adjust based on your design */
+        background-color: #ffffff;
+        border: transparent;
+        max-height: 200px; /* Limit vertical height */
+        overflow-y: auto; /* Enable vertical scrolling if content overflows */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap; /* Prevent text wrapping */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        z-index: 1000; /* Ensure it appears above other elements */
+        border-radius: 5px;
+        font-size: 1.2rem;
+      }
+
+      /* Autocomplete Item */
+      .autocomplete-item {
+        padding: 5px 10px; /* Reduce padding for a more compact look */
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start; /* Ensure text starts from the left */
+        transition: background-color 0.2s ease;
+        text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+        font-size: 1rem; /* Smaller font size */
+      }
+
+      /* Highlight matching text */
+      .highlight {
+        font-weight: bold;
+        color: #6a0dad;
+        font-size: inherit; /* Ensure it matches the adjusted font size */
+      }
+
+      /* Autocomplete Item Hover and Active */
+      .autocomplete-item:hover,
+      .autocomplete-item.active {
+        background-color: #bababa;
+      }
+
+      /* Highlight the matching part */
+      .highlight {
+        font-weight: bold;
+        color: #6a0dad;
+      }
+
+      /* Clear Search Button */
+      .clear-btn {
+        position: absolute;
+        right: 45px;
+        cursor: pointer;
+        font-size: 20px;
+        color: #999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .search-bar:valid ~ .clear-btn {
+        opacity: 1;
+      }
+
+      /* Main container for categories and products */
+      .main-container {
+        display: flex;
+        max-width: 1200px;
+        margin: 20px auto;
+        position: sticky;
+        position: -webkit-sticky;
+        display: flex;
+      }
+
+      /* Category Sidebar */
+      .category-sidebar {
+        width: 20%;
+        padding: 20px;
+        background: linear-gradient(to bottom, #6a0dad, #8b008b);
+        color: goldenrod;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-right: 20px;
+      }
+
+      .category-sidebar h3 {
+        color: goldenrod;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .category-sidebar a {
+        color: goldenrod;
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      /* Main Products Section */
+      .products-section {
+        width: 80%;
+        padding: 20px;
+        overflow-y: auto;
+      }
+
+      .products-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .products-header h1 {
+        font-size: 2.5rem;
+        color: #6a0dad;
+      }
+
+      /* Product Grid */
+      .product-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 20px;
+        position: relative;
+        z-index: 0;
+      }
+
+      /* Product Card */
+      .product-card {
+        position: relative;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        width: 250px; /* Fixed width for product cards */
+        height: 300px; /* Fixed height for product cards */
+        flex: 1 1 calc(250px-20px);
+      }
+
+      .product-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .product-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .product-card h3 {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+      }
+
+      .product-card:hover h3 {
+        opacity: 1;
+      }
+      footer {
+        background-color: #6a0dad;
+        color: white;
+        padding: 40px 20px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-logo {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .footer-logo img {
+        height: 80px;
+        margin-bottom: 10px;
+      }
+
+      .footer-section {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 100%;
+        text-align: left;
+        margin-bottom: 20px;
+      }
+
+      .footer-column h4 {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 5px;
+      }
+
+      .footer-column ul li a {
+        text-decoration: none;
+        color: white;
+        transition: color 0.3s ease;
+      }
+
+      .footer-column ul li a:hover {
+        color: #ffccff;
+      }
+
+      .footer-social {
+        margin-top: 20px;
+      }
+
+      .footer-social a {
+        color: white;
+        margin-right: 15px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+      }
+
+      .footer-social a:hover {
+        color: #ffccff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="logo">
+        <img
+          src="https://manashamim.ir/wp-content/uploads/2023/11/Mana-Shamim-Golsa-Logo-smal.png"
+          alt="Manashamim Logo"
+        />
+      </div>
+      <ul class="nav-links">
+        <li><a href="Mana2.html">Home</a></li>
+        <li><a href="Products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+      <!-- Category Sidebar with Search Bar -->
+      <div class="category-sidebar">
+        <div class="search-container">
+          <input
+            type="text"
+            class="search-bar"
+            id="search-bar"
+            placeholder="Search for products..."
+            autocomplete="off"
+            oninput="showAutocomplete(this.value)"
+            onkeydown="handleSearchKey(event)"
+            required
+          />
+          <span class="search-icon">&#128269;</span>
+          <span class="clear-btn" onclick="clearSearch()">&#10006;</span>
+          <div class="autocomplete-list" id="autocomplete-list"></div>
+        </div>
+        <h3>Categories</h3>
+        <a href="#" onclick="filterCategory('all')">All Products</a>
+        <a href="#" onclick="filterCategory('industrial')">Industrial</a>
+        <a href="#" onclick="filterCategory('celebration')">Celebration</a>
+        <a href="#" onclick="filterCategory('perfume')">Perfume</a>
+        <a href="#" onclick="filterCategory('cologne')">Cologne</a>
+        <a href="#" onclick="filterCategory('Body spray')">Body Sprays</a>
+        <a href="#" onclick="filterCategory('Air freshener')">Air Fresheners</a>
+        <a href="#" onclick="filterCategory('stands')">Royal Stands</a>
+      </div>
+
+      <!-- Products Section -->
+      <section class="products-section">
+        <div class="products-header">
+          <h1>Our Products</h1>
+          <p>Explore our exclusive range of products</p>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="product-grid">
+          <!-- Product 1 -->
+          <a
+            href="Products-list-mana/Perfumes/Coco-Chanel-mademoiselle-royal-eau-de-parrfum-for-women.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-33.jpg"
+              alt="Coco Chanel Mademoiselle Royal Eau de Parfum For Women"
+            />
+            <h3>Coco Chanel Mademoiselle Royal Eau de Parfum For Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Chanel-chance-royal-women.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-27.jpg"
+              alt="Chanel Chance Royal Eau de Parfum For Women "
+            />
+            <h3>Chanel Chance Royal Eau de Parfum For Women</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Perfumes/Euphoria-royal-women.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-25.jpg"
+              alt="Euphoria Royal Eau de Parfum For Women"
+            />
+            <h3>Royal Calvin Klein Euphoria Eau de Parfum For Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Lalique-amour-royal-women.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-30.jpg"
+              alt="Lalique L'Amour Royal Eau de Parfum For Women"
+            />
+            <h3>Lalique L'Amour Royal Eau de Parfum For Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Alien-royal-women.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-36.jpg"
+              alt="Alien Royal Eau de Parfum For Women"
+            />
+            <h3>Alien Royal Eau de Parfum For Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Yves-saint-opium-black-women.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-24.jpg"
+              alt="Yves Saint Laurent Opium Black Royal Eau de Parfum For Women"
+            />
+            <h3>
+              Yves Saint Laurent Opium Black Royal Eau de Parfum For Women
+            </h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Lancome-belle-royal-women.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-38.jpg"
+              alt="Lancôme La Vie Est Belle Royal Eau de Parfum For Women"
+            />
+            <h3>Lancôme La Vie Est Belle Royal Eau de Parfum For Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/good-girl-women.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-23.jpg"
+              alt="Good Girl Royal Eau de Parfum For Women"
+            />
+            <h3>Good Girl Royal Eau de Parfum For Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Parfums-de-Marly-men.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-29.jpg"
+              alt="Parfums de Marly Pegasus Royal Eau de Parfum For men"
+            />
+            <h3>Parfums de Marly Pegasus Royal Eau de Parfum For men</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Blue-chanle-men.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-37.jpg"
+              alt="Blue de Chanel Royal Eau de Parfum For men"
+            />
+            <h3>Blue de Chanel Royal Eau de Parfum For men</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Terre-Hermes-men.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-34.jpg"
+              alt="Terre d'Hermès Royal Eau de Parfum For men"
+            />
+            <h3>Terre d'Hermès Royal Eau de Parfum For men</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Creed-aventus-men.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-22.jpg"
+              alt="Creed AventusRoyal Eau de Parfum For men"
+            />
+            <h3>Creed Aventus Royal Eau de Parfum For men</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Dior-sauvage-men.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-35.jpg"
+              alt="Dior Sauvage Royal Eau de Parfum For men"
+            />
+            <h3>Dior Sauvage Royal Eau de Parfum For men</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Invictus-royal-men.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-28.jpg"
+              alt="Invictus Royal Eau de Parfum For men"
+            />
+            <h3>Invictus Royal Eau de Parfum For men</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Interlude-royal-men.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-26.jpg"
+              alt="Interlude Royal Eau de Parfum For men"
+            />
+            <h3>Interlude Royal Eau de Parfum For men</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Black-royal-men.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-31.jpg"
+              alt="Black Royal Eau de Parfum For men"
+            />
+            <h3>Royal Splendor Black Eau de Parfum For men</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Sport-megamare-sport.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-19.jpg"
+              alt="Sport Megamare Orto Parisi Royal Sport Eau de Parfum"
+            />
+            <h3>Royal Megamare Orto Parisi Sport Eau de Parfum</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/Sport-captain-black.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-20.jpg"
+              alt="Sport Captain Black Royal Sport Eau de Parfum"
+            />
+            <h3>Royal Captain Black Sport Eau de Parfum</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/540-royal-baccarat-sport.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-32.jpg"
+              alt="540 Royal Eau de Parfum Sport Baccarat Rouge"
+            />
+            <h3>540 Royal Eau de Parfum Sport Baccarat Rouge</h3>
+          </a>
+          <a
+            href="Products-list-mana/Perfumes/fleure-Narcotique-sport.html"
+            class="product-card"
+            data-category="perfume"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-21.jpg"
+              alt="Fleure Narcotique Royal Sport Eau de Parfum"
+            />
+            <h3>Fleure Narcotique Royal Sport Eau de Parfum</h3>
+          </a>
+
+          <!-- Product 2 -->
+          <a
+            href="Products-list-mana/cologne/Zara-red-women.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Red Temptation Woman"
+            />
+            <h3>Zara Red Temptation for Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/Zara-memorable-women.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Memorable Aura Woman"
+            />
+            <h3>Zara Memorable Aura for Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/zara-memoire-intense-women.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Memoire Intense Woman"
+            />
+            <h3>Zara Memoire Intense for Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/zara-golden-women.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Golden Decade Woman"
+            />
+            <h3>Zara Golden Decade for Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/Zara-amber-fusion-women.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Amber Fusion for Women"
+            />
+            <h3>Zara Amber Fusion for Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/Zara-sublime-women.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Sublime Epoque Woman"
+            />
+            <h3>Zara Sublime Epoque for Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/zara-sultry-women.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara SULTRY PEAR for Women"
+            />
+            <h3>Zara SULTRY PEAR for Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/Zara-rose-temeraire-women.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara ROSE TEMERAIRE for Women"
+            />
+            <h3>Zara ROSE TEMERAIRE for Women</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/Zara-night-men.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Night Pour Homme II for Men"
+            />
+            <h3>Zara Night Pour Homme II for Men</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/Zara-blue-men.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Blue Spirit for Men"
+            />
+            <h3>Zara Blue Spirit for Men</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/zara-for-him-men.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara For Him for Men"
+            />
+            <h3>Zara For Him for Men</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/zara-lisboa-men.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Lisboa for Men"
+            />
+            <h3>Zara Lisboa for Men</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/zara-london-men.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara London for Men"
+            />
+            <h3>Zara London for Men</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/zara-silver-men.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="/Product-Photos/SliverSummer.jpeg"
+              alt="Zara Silver Summer for Men"
+            />
+            <h3>Zara Silver Summer for Men</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/zara-uomo-men.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Uomo for Men"
+            />
+            <h3>Zara Uomo for Men</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/zara-seoul-men.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Seoul for Men"
+            />
+            <h3>Zara Seoul for Men</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/Zara-appleJuice-sport.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Apple Juice Sport"
+            />
+            <h3>Zara Apple Juice Sport</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/Zara-oriental-sport.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Oriental Sport"
+            />
+            <h3>Zara Oriental Sport</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/Zara-redVanilla-sport.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Red Vanilla Sport"
+            />
+            <h3>Zara Red Vanilla Sport</h3>
+          </a>
+          <a
+            href="Products-list-mana/cologne/Zara-Wonder-sport.html"
+            class="product-card"
+            data-category="cologne"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Zara Wonder Rose Sport"
+            />
+            <h3>Zara Wonder Rose Sport</h3>
+          </a>
+          <!-- Product 3 -->
+          <a
+            href="/Products-list-mana/Body/Chanel-coco-body-women 14.05.44.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Chanel Coco Mademoiselle Royal Body Spray for Women"
+            />
+            <h3>Chanel Coco Mademoiselle Royal Body Spray for Women</h3>
+          </a>
+          <a
+            href="/Products-list-mana/Body/Chanel-chance-body-women.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Chanel Chance Royal Body Spray for Women"
+            />
+            <h3>Chanel Chance Royal Body Spray for Women</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Calvin-Euphoria-women.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Calvin Klein Euphoria Royal Body Spray for Women"
+            />
+            <h3>Calvin Klein Euphoria Royal Body Spray for Women</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Lalique-amour-body-women.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Lalique L'Amour Royal Body Spray for Women"
+            />
+            <h3>Lalique L'Amour Royal Body Spray for Women</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Alien-body-women.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Alien Royal Body Spray for Women"
+            />
+            <h3>Alien Royal Body Spray for Women</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Opium-black-body-women.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Opium Black Royal Body Spray for Women"
+            />
+            <h3>Opium Black Royal Body Spray for Women</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Lancome-vie-body-women.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Lancôme La Vie Est Belle Royal Body Spray for Women"
+            />
+            <h3>Lancôme La Vie Est Belle Royal Body Spray for Women</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/GoodGirl-body-women.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Good Girl Royal Body Spray for Women"
+            />
+            <h3>Good Girl Royal Body Spray for Women</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/parfum-marly-body-men.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Parfums de Marly Pegasus Royal Body Spray for Men"
+            />
+            <h3>Parfums de Marly Pegasus Royal Body Spray for Men</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Blue-chanel-body-men.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Blue de Chanel Royal Body Spray for Men"
+            />
+            <h3>Blue de Chanel Royal Body Spray for Men</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Terre-hermes-body-men.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Terre d'Hermès Royal Body Spray for Men"
+            />
+            <h3>Terre d'Hermès Royal Body Spray for Men</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/creed-body-men.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Creed Aventus Royal Body Spray for Men"
+            />
+            <h3>Creed Aventus Royal Body Spray for Men</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Dior-sauvage-body-men.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Dior Sauvage Royal Body Spray for Men"
+            />
+            <h3>Dior Sauvage Royal Body Spray for Men</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Paco-rabanne-body-men.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Paco Rabanne Invictus Royal Body Spray for Men"
+            />
+            <h3>Paco Rabanne Invictus Royal Body Spray for Men</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Amouge-interlude-body-men.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Amouage Interlude Royal Body Spray for Men"
+            />
+            <h3>Amouage Interlude Royal Body Spray for Men</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Splendor-black-body-men.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Splendor Black Royal Body Spray for Men"
+            />
+            <h3>Splendor Black Royal Body Spray for Men</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Megamare-orto-body-sport.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Megamare Orto Parisi Royal Sport Body Spray"
+            />
+            <h3>Megamare Orto Parisi Royal Sport Body Spray</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/captainBlack-body-sport.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Captain Black Royal Sport Body Spray"
+            />
+            <h3>Captain Black Royal Sport Body Spray</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/540-body-sport.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Sport Body Spray 540 Baccarat Rouge Royal"
+            />
+            <h3>Royal 540 Sport Body Spray Baccarat Rouge</h3>
+          </a>
+
+          <a
+            href="Products-list-mana/Body/Fleure-body-sport.html"
+            class="product-card"
+            data-category="Body spray"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Fleure Narcotique Royal Sport Body Spray"
+            />
+            <h3>Royal Fleure Narcotique Sport Body Spray</h3>
+          </a>
+
+          <!-- Product 4 -->
+          <a
+            href="Products-list-mana/Air/Sultan-air.html"
+            class="product-card"
+            data-category="Air freshener"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-07.jpg"
+              alt="Sultan Royal Air Freshener"
+            />
+            <h3>Sultan Royal Air Freshener</h3>
+          </a>
+          <a
+            href="Products-list-mana/Air/Allure-air.html"
+            class="product-card"
+            data-category="Air freshener"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-10.jpg"
+              alt="Allure Royal Air Freshener"
+            />
+            <h3>Allure Royal Air Freshener</h3>
+          </a>
+          <a
+            href="Products-list-mana/Air/Davidoff-air.html"
+            class="product-card"
+            data-category="Air freshener"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-08.jpg"
+              alt="Davidof Royal Air Freshener"
+            />
+            <h3>Davidof Royal Air Freshener</h3>
+          </a>
+          <a
+            href="Products-list-mana/Air/Lacoste-air.html"
+            class="product-card"
+            data-category="Air freshener"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-09.jpg"
+              alt="Lacoste Royal Air Freshener"
+            />
+            <h3>Lacoste Royal Air Freshener</h3>
+          </a>
+          <a
+            href="Products-list-mana/Air/Dunhill-air.html"
+            class="product-card"
+            data-category="Air freshener"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-11.jpg"
+              alt="Dunhil Royal Air Freshener"
+            />
+            <h3>Dunhil Royal Air Freshener</h3>
+          </a>
+          <a
+            href="Products-list-mana/Air/Euphoria-air.html"
+            class="product-card"
+            data-category="Air freshener"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-12.jpg"
+              alt="Euphoria Royal Air Freshener"
+            />
+            <h3>Euphoria Royal Air Freshener</h3>
+          </a>
+          <a
+            href="Products-list-mana/Air/Chanel-air.html"
+            class="product-card"
+            data-category="Air freshener"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-13.jpg"
+              alt="Chanel Chance Air Freshener"
+            />
+            <h3>Chanel Chance Air Freshener</h3>
+          </a>
+          <!-- Product 5 -->
+          <a
+            href="Products-list-mana/Stands/Elegant-stands.html"
+            class="product-card"
+            data-category="stands"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Elegant Royal Stand"
+            />
+            <h3>Elegant Royal Stand</h3>
+          </a>
+          <a
+            href="Products-list-mana/Stands/Joyful-stand.html"
+            class="product-card"
+            data-category="stands"
+          >
+            <img
+              src="https://via.placeholder.com/250x200"
+              alt="Joyful Royal Stand"
+            />
+            <h3>Joyful Royal Stand</h3>
+          </a>
+
+          <!-- Product 6 -->
+          <a
+            href="Products-list-mana/Industrial/Camping-gas.html"
+            class="product-card"
+            data-category="industrial"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-01.jpg"
+              alt="Royal Camping Gas Spray"
+            />
+            <h3>Royal Camping Gas Spray</h3>
+          </a>
+          <a
+            href="Products-list-mana/Industrial/lighter-gas.html"
+            class="product-card"
+            data-category="industrial"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-02.jpg"
+              alt="Royal Lighter Gas Spray"
+            />
+            <h3>Royal Lighter Gas Spray</h3>
+          </a>
+          <a
+            href="Products-list-mana/Industrial/tire-foam.html"
+            class="product-card"
+            data-category="industrial"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-06.jpg"
+              alt="Royal Tire foam Spray"
+            />
+            <h3>Royal Tire Foam Spray</h3>
+          </a>
+          <a
+            href="Products-list-mana/Industrial/tire-wax.html"
+            class="product-card"
+            data-category="industrial"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-05.jpg"
+              alt="Royal Tire Wax Spray"
+            />
+            <h3>Royal Tire Wax Spray</h3>
+          </a>
+          <a
+            href="Products-list-mana/Industrial/injector.html"
+            class="product-card"
+            data-category="industrial"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-03.jpg"
+              alt="Royal Injector Cleaner Spray"
+            />
+            <h3>Royal Injector Cleaner Spray</h3>
+          </a>
+          <a
+            href="Products-list-mana/Industrial/wd-40.html"
+            class="product-card"
+            data-category="industrial"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-04.jpg"
+              alt="Royal Wd-40 Spray"
+            />
+            <h3>Royal WD-40 Spray</h3>
+          </a>
+          <a
+            href="Products-list-mana/Industrial/happy-snow1.html"
+            class="product-card"
+            data-category="celebration"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-17.jpg"
+              alt="Royal Happy Snow Spray"
+            />
+            <h3>Royal Happy Snow Spray</h3>
+          </a>
+          <a
+            href="Products-list-mana/Industrial/happy-snow2.html"
+            class="product-card"
+            data-category="celebration"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-14.jpg"
+              alt="Royal Happy Snow Spray"
+            />
+            <h3>Royal Happy Snow Spray</h3>
+          </a>
+          <a
+            href="Products-list-mana/Industrial/happy-snow3.html"
+            class="product-card"
+            data-category="celebration"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-15.jpg"
+              alt="Royal Happy Snow Spray"
+            />
+            <h3>Royal Happy Snow Spray</h3>
+          </a>
+          <a
+            href="Products-list-mana/Industrial/happy-snow4.html"
+            class="product-card"
+            data-category="celebration"
+          >
+            <img
+              src="/Product-Photos/سایز 200در250-16.jpg"
+              alt="Royal Happy Snow Spray"
+            />
+            <h3>Royal Happy Snow Spray</h3>
+          </a>
+        </div>
+      </section>
+    </div>
+    <div id="footer"></div>
+    <script>
+      fetch("/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+
+    <script>
+      const products = [
+        "Perfume",
+        "Cologne",
+        "Body Freshener Spray",
+        "Air Freshener Spray",
+        "Camping Gas Spray",
+        "Lighter Gas Spray",
+        "Engine Cleaner",
+        "WD-40",
+        "Tire Foam",
+        "Tire Wax",
+        "Happy Snow",
+        "Coco Chanel Mademoiselle Royal Eau de Parfum For Women",
+        "Chanel Chance Royal Eau de Parfum For Women",
+        "Royal Calvin Klein Euphoria Eau de Parfum For Women",
+        "Lalique L'Amour Royal Eau de Parfum For Women",
+        "Alien Royal Eau de Parfum For Women",
+        "Yves Saint Laurent Opium Black Royal Eau de Parfum For Women",
+        "Lancôme La Vie Est Belle Royal Eau de Parfum For Women",
+        "Good Girl Royal Eau de Parfum For Women",
+        "Parfums de Marly Pegasus Royal Eau de Parfum For men",
+        "Blue de Chanel Royal Eau de Parfum For men",
+        "Terre d'Hermès Royal Eau de Parfum For men",
+        "Creed Aventus Royal Eau de Parfum For men",
+        "Dior Sauvage Royal Eau de Parfum For men",
+        "Invictus Royal Eau de Parfum For men",
+        "Interlude Royal Eau de Parfum For men",
+        "Royal Splendor Black Eau de Parfum For men",
+        "Royal Megamare Orto Parisi Sport Eau de Parfum",
+        "Royal Captain Black Sport Eau de Parfum",
+        "540 Royal Eau de Parfum Sport Baccarat Rouge",
+        "Fleure Narcotique Royal Sport Eau de Parfum",
+        "Zara Red Temptation for Women",
+        "Zara Memorable Aura for Women",
+        "Zara Memoire Intense for Women",
+        "Zara Golden Decade for Women",
+        "Zara Amber Fusion for Women",
+        "Zara Sublime Epoque for Women",
+        "Zara SULTRY PEAR for Women",
+        "Zara ROSE TEMERAIRE for Women",
+        "Zara Night Pour Homme II for Men",
+        "Zara Blue Spirit for Men",
+        "Zara For Him for Men",
+        "Zara Lisboa for Men",
+        "Zara London for Men",
+        "Zara Silver Summer for Men",
+        "Zara Uomo for Men",
+        "Zara Seoul for Men",
+        "Zara Apple Juice Sport",
+        "Zara Oriental Sport",
+        "Zara Red Vanilla Sport",
+        "Zara Wonder Rose Sport",
+        "Chanel Coco Mademoiselle Royal Body Spray for Women",
+        "Chanel Chance Royal Body Spray for Women",
+        "Calvin Klein Euphoria Royal Body Spray for Women",
+        "Lalique L'Amour Royal Body Spray for Women",
+        "Alien Royal Body Spray for Women",
+        "Opium Black Royal Body Spray for Women",
+        "Lancôme La Vie Est Belle Royal Body Spray for Women",
+        "Good Girl Royal Body Spray for Women",
+        "Parfums de Marly Pegasus Royal Body Spray for Men",
+        "Blue de Chanel Royal Body Spray for Men",
+        "Terre d'Hermès Royal Body Spray for Men",
+        "Creed Aventus Royal Body Spray for Men",
+        "Dior Sauvage Royal Body Spray for Men",
+        "Paco Rabanne Invictus Royal Body Spray for Men",
+        "Amouage Interlude Royal Body Spray for Men",
+        "Splendor Black Royal Body Spray for Men",
+        "Megamare Orto Parisi Royal Sport Body Spray",
+        "Captain Black Royal Sport Body Spray",
+        "Royal 540 Sport Body Spray Baccarat Rouge",
+        "Royal Fleure Narcotique Sport Body Spray",
+        "Sultan Royal Air Freshener",
+        "Allure Royal Air Freshener",
+        "Davidof Royal Air Freshener",
+        "Lacoste Royal Air Freshener",
+        "Dunhil Royal Air Freshener",
+        "Euphoria Royal Air Freshener",
+        "Chanel Chance Air Freshener",
+        "Elegant Royal Stand",
+        "Joyful Royal Stand",
+        "Royal Camping Gas Spray",
+        "Royal Lighter Gas SprayRoyal Tire Foam Spray",
+        "Royal Tire Wax Spray",
+        "Royal Injector Cleaner Spray",
+        "Royal WD-40 Spray",
+        "Royal Happy Snow Spray",
+      ];
+
+      let currentIndex = -1;
+
+      // Show autocomplete suggestions with initial letter matching
+      function showAutocomplete(value) {
+        const autocompleteList = document.getElementById("autocomplete-list");
+        autocompleteList.innerHTML = ""; // Clear previous results
+
+        if (value.trim() === "") return;
+
+        const filteredProducts = products.filter((product) => {
+          // Match whole words only
+          const regex = new RegExp(`\\b${value}\\b`, "i");
+          return regex.test(product);
+        });
+
+        filteredProducts.forEach((product) => {
+          const item = document.createElement("div");
+          item.className = "autocomplete-item";
+
+          // Highlight matching parts with visible spaces around them
+          const regex = new RegExp(`(\\b${value}\\b)`, "i");
+          const highlightedText = product.replace(regex, (match) => {
+            // Wrap the match with a span and include spaces outside the span
+            return `<span style="margin-left: 0.2rem;"></span><span class="highlight">${match}</span><span style="margin-right: 0.2rem;"></span>`;
+          });
+
+          // Set the HTML content
+          item.innerHTML = highlightedText;
+          item.onclick = () => {
+            document.getElementById("search-bar").value = product;
+            autocompleteList.innerHTML = "";
+            searchProducts({ key: "Enter" });
+          };
+
+          autocompleteList.appendChild(item);
+        });
+      }
+
+      // Handle keypress (Enter and Arrow navigation)
+      function handleSearchKey(event) {
+        const autocompleteList = document.getElementById("autocomplete-list");
+        const items = autocompleteList.querySelectorAll(".autocomplete-item");
+
+        if (event.key === "ArrowDown") {
+          currentIndex = (currentIndex + 1) % items.length;
+          highlightItem(items);
+        } else if (event.key === "ArrowUp") {
+          currentIndex = (currentIndex - 1 + items.length) % items.length;
+          highlightItem(items);
+        } else if (event.key === "Enter") {
+          if (currentIndex >= 0 && items.length > 0) {
+            document.getElementById("search-bar").value =
+              items[currentIndex].textContent;
+            autocompleteList.innerHTML = "";
+            searchProducts({ key: "Enter" });
+          } else {
+            searchProducts(event);
+          }
+        }
+      }
+
+      function highlightItem(items) {
+        items.forEach((item, index) => {
+          item.classList.remove("active");
+          if (index === currentIndex) {
+            item.classList.add("active");
+          }
+        });
+      }
+
+      // Clear the search bar and reset the product grid
+      function clearSearch() {
+        document.getElementById("search-bar").value = "";
+        showAllProducts();
+      }
+
+      // Show all products
+      function showAllProducts() {
+        const products = document.querySelectorAll(".product-card");
+        products.forEach((product) => {
+          product.style.display = "block";
+        });
+      }
+
+      // Search for products globally when Enter is pressed
+      function searchProducts(event) {
+        if (event.key === "Enter") {
+          const input = document
+            .getElementById("search-bar")
+            .value.toLowerCase();
+          const products = document.querySelectorAll(".product-card");
+          products.forEach((product) => {
+            const name = product.querySelector("h3").textContent.toLowerCase();
+            if (name.includes(input)) {
+              product.style.display = "block";
+            } else {
+              product.style.display = "none";
+            }
+          });
+        }
+      }
+
+      // Filter products by category
+      function filterCategory(category) {
+        const products = document.querySelectorAll(".product-card");
+        products.forEach((product) => {
+          if (
+            category === "all" ||
+            product.getAttribute("data-category") === category
+          ) {
+            product.style.display = "block";
+          } else {
+            product.style.display = "none";
+          }
+        });
+      }
+
+      // Close autocomplete dropdown when clicking outside
+      document.addEventListener("click", (event) => {
+        const searchBar = document.getElementById("search-bar");
+        const autocompleteList = document.getElementById("autocomplete-list");
+
+        // If click is outside of search bar or autocomplete list, close the list
+        if (
+          !searchBar.contains(event.target) &&
+          !autocompleteList.contains(event.target)
+        ) {
+          autocompleteList.innerHTML = ""; // Hide dropdown
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Special Perfume</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+      }
+
+      /* Top Navigation Bar */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: #6a0dad;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        height: 50px;
+      }
+
+      .logo img {
+        height: 40px;
+        width: auto;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+      }
+
+      .nav-links a:hover {
+        color: #ffccff;
+      }
+
+      /* Product Page Layout */
+      .product-page {
+        display: flex;
+        align-items: flex-start;
+        max-width: 1200px;
+        margin: 50px auto;
+        gap: 80px;
+        margin-left: 45px;
+        margin-right: 45px;
+      }
+
+      /* Product Image Container */
+      .product-image-container {
+        position: sticky;
+        top: 120px;
+        transform: translateX(-100px);
+        transform: translateY(0px);
+        margin-left: 0px;
+        align-items: center;
+        flex: 1.2; /* Take up equal space on the left */
+        max-width: 50%;
+        height: auto;
+        overflow: hidden;
+        border-radius: 5%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+      }
+
+      .product-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.1s ease;
+      }
+      .product-name {
+        flex: 1;
+        padding: 20px;
+      }
+      .product-name p {
+        font-size: large;
+        color: goldenrod;
+        font-weight: bold;
+      }
+
+      /* Product Details */
+      .product-details {
+        flex: 1; /* Take up equal space on the right */
+        padding: 20px;
+        font-family: "Times New Roman", Times, serif;
+      }
+
+      .product-details h1 {
+        color: #6a0dad;
+        margin-bottom: 20px;
+      }
+      .product-details h2 {
+        color: #6a0dad;
+        margin-bottom: 20px;
+      }
+      .product-details h3 {
+        font-weight: bold;
+        display: inline;
+      }
+      .product-details p {
+        font-size: 2rem;
+      }
+      .product-details strong {
+        color: #6a0dad;
+      }
+      .product-details li {
+        margin-bottom: 10px;
+        transform: translateX(-20px);
+      }
+      .product-details p {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .product-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgb(218, 168, 41);
+        margin-bottom: 20px;
+        margin-left: 10px;
+      }
+
+      /* Product Attributes */
+      .product-attributes {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+        margin-left: 30px;
+        margin-top: 30px;
+      }
+
+      .product-attributes li {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .product-attributes span {
+        font-weight: bold;
+        color: #6a0dad;
+      }
+      ul li:hover {
+        transform: scale(1.05);
+        transition: 0.5s;
+        text-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="logo">
+        <img
+          src="https://manashamim.ir/wp-content/uploads/2023/11/Mana-Shamim-Golsa-Logo-smal.png"
+          alt="Manashamim Logo"
+        />
+      </div>
+      <ul class="nav-links">
+        <li><a href="/Mana2.html">Home</a></li>
+        <li><a href="/products.html">Products</a></li>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Product Page Content -->
+    <div class="product-page">
+      <!-- Image with Dynamic Zoom Feature -->
+      <div class="product-image-container" id="product-image-container">
+        <img
+          src="https://via.placeholder.com/900x600"
+          alt="Special Perfume Image"
+          id="product-image"
+        />
+      </div>
+      <div class="product-details">
+        <p
+          style="
+            font-size: 36px;
+            font-weight: bold;
+            color: goldenrod;
+            margin-top: 20px;
+          "
+        >
+          Royal Sultan Air Freshener
+        </p>
+        <p style="font-size: larger; line-height: 1.7rem">
+          <strong style="color: rgb(188, 143, 27); font-weight: bold"
+            >Volume:</strong
+          >
+          250 ml
+        </p>
+
+        <p style="font-size: larger; line-height: 1.7rem">
+          <strong style="color: rgb(188, 143, 27); font-weight: bold"
+            >Fragrance Nature:</strong
+          >
+          Warm
+        </p>
+
+        <p style="font-size: larger; line-height: 1.7rem">
+          <strong style="color: rgb(188, 143, 27); font-weight: bold"
+            >Fragrance Tone:</strong
+          >
+          Sweet
+        </p>
+
+        <p style="font-size: larger; line-height: 1.7rem">
+          <strong style="color: rgb(188, 143, 27); font-weight: bold"
+            >Longevity:</strong
+          >
+          Excellent
+        </p>
+
+        <p style="font-size: larger; line-height: 1.7rem">
+          <strong style="color: rgb(188, 143, 27); font-weight: bold"
+            >Sillage:</strong
+          >
+          Excellent
+        </p>
+
+        <p style="font-size: larger; line-height: 1.7rem">
+          <strong style="color: rgb(188, 143, 27); font-weight: bold"
+            >Suitable for:</strong
+          >
+          Spring and Summer
+        </p>
+
+        <h1>A breif History</h1>
+        <p style="font-size: larger; line-height: 1.7rem">
+          The
+          <strong style="color: rgb(188, 143, 27); font-weight: bold">
+            Royal Sultan Air Freshener
+          </strong>
+          is an exceptional product designed for those who seek to create a
+          pleasant and refreshing atmosphere in their environment. This air
+          freshener, with its simple yet elegant design, can fill any space with
+          a delightful and lasting fragrance, bringing a sense of tranquility
+          and vitality to your surroundings. The
+          <strong style="color: rgb(188, 143, 27); font-weight: bold"
+            >Sultan scent</strong
+          >, used in this spray, is a unique blend of sweet and spicy notes,
+          evoking a feeling of grandeur and royalty.
+        </p>
+
+        <p style="font-size: larger; line-height: 1.7rem">
+          This complex and sophisticated scent is an ideal choice for those who
+          want to create a distinctive and luxurious ambiance in their space.
+          The
+          <strong style="color: rgb(188, 143, 27); font-weight: bold">
+            Royal Sultan Air Freshener
+          </strong>
+          is produced by the renowned brand
+          <strong style="color: rgb(188, 143, 27); font-weight: bold"
+            >Royal</strong
+          >, which is recognized as a leader in offering unparalleled air
+          freshening products. Designed to create a unique and comfortable
+          environment for customers, this spray's fragrance can add a touch of
+          luxury and elegance to any space.
+        </p>
+
+        <div class="details-container">
+          <h1 style="margin-bottom: 10px; line-height: 2rem">
+            Fragrance Notes:
+          </h1>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            The
+            <strong style="color: rgb(188, 143, 27); font-weight: bold">
+              Royal Sultan Air Freshener
+            </strong>
+            features an enticing blend of sweet, woody, and spicy notes that add
+            a royal and unique atmosphere to your environment. This fragrance is
+            designed for those seeking a rich, complex, and long-lasting aroma.
+          </p>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            <strong style="color: rgb(188, 143, 27); font-weight: bold"
+              >Top Notes:</strong
+            >
+            Orange, Lemon, and Grapefruit. These notes deliver a fresh and
+            vibrant citrus burst, infusing the air with a lively and energizing
+            aroma.
+          </p>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            <strong style="color: rgb(188, 143, 27); font-weight: bold"
+              >Heart Notes:</strong
+            >
+            Cardamom, Cinnamon, and Nutmeg. These spicy notes bring warmth and
+            elegance, enriching the fragrance's complexity and depth.
+          </p>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            <strong style="color: rgb(188, 143, 27); font-weight: bold"
+              >Base Notes:</strong
+            >
+            Sandalwood, Musk, and Vanilla. These warm and soft notes create a
+            luxurious and lasting impression, ensuring the fragrance lingers
+            beautifully in your space.
+          </p>
+
+          <h1 style="margin-bottom: 10px; line-height: 2rem">
+            Seasonal Suitability:
+          </h1>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            The
+            <strong style="color: rgb(188, 143, 27); font-weight: bold">
+              Royal Sultan Air Freshener
+            </strong>
+            combines citrus, spicy, and woody notes, making it particularly
+            well-suited for
+            <strong style="color: rgb(188, 143, 27); font-weight: bold"
+              >autumn and winter</strong
+            >. Its depth and warmth create a sense of comfort and coziness in
+            enclosed and colder spaces.
+          </p>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            However, its balanced blend of sweet and spicy accords is versatile
+            enough to be an excellent choice for indoor use throughout the year,
+            even during the
+            <strong style="color: rgb(188, 143, 27); font-weight: bold"
+              >spring and summer</strong
+            >
+            seasons.
+          </p>
+
+          <h1 style="margin-bottom: 10px; line-height: 2rem">
+            Packaging Description:
+          </h1>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            The packaging of the
+            <strong style="color: rgb(188, 143, 27); font-weight: bold">
+              Royal Sultan Air Freshener
+            </strong>
+            features a simple and elegant design in an orange hue that
+            effectively conveys energy and vitality. This vibrant orange not
+            only catches the eye but also adds a touch of life and freshness to
+            the space where the spray is placed.
+          </p>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            The ergonomic bottle is thoughtfully designed for ease of use,
+            allowing for quick and simple application with just one press,
+            releasing a delightful fragrance into the air. Its minimalist yet
+            luxurious design makes it an excellent fit for any space, whether at
+            home or in the office, adding a touch of elegance and freshness.
+          </p>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            The sturdy and high-quality packaging ensures the fragrance remains
+            intact, lasting long in your environment and providing consistent
+            freshness over time.
+          </p>
+          <h1 style="margin-bottom: 10px; line-height: 2rem">
+            Recommended Usage:
+          </h1>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            The
+            <strong style="color: rgb(188, 143, 27); font-weight: bold">
+              Sultan Royal Air Freshener
+            </strong>
+            is ideal for a variety of spaces and environments due to its complex
+            yet gentle fragrance. You can use this spray in different locations,
+            including:
+          </p>
+
+          <ul
+            style="font-size: larger; line-height: 1.7rem; padding-left: 20px"
+          >
+            <li>
+              <strong style="color: rgb(188, 143, 27); font-weight: bold">
+                Living rooms and reception areas:
+              </strong>
+              To create a pleasant and elegant atmosphere for guests and family.
+            </li>
+            <li>
+              <strong style="color: rgb(188, 143, 27); font-weight: bold"
+                >Work offices:</strong
+              >
+              For a relaxing and professional environment at the workplace.
+            </li>
+            <li>
+              <strong style="color: rgb(188, 143, 27); font-weight: bold"
+                >Bedrooms:</strong
+              >
+              To create a calm and soothing ambiance before sleep.
+            </li>
+            <li>
+              <strong style="color: rgb(188, 143, 27); font-weight: bold">
+                Waiting areas and hotels:
+              </strong>
+              To evoke a welcoming and pleasant feeling for visitors.
+            </li>
+            <li>
+              <strong style="color: rgb(188, 143, 27); font-weight: bold"
+                >Cars:</strong
+              >
+              For a fresh and fragrant interior in your vehicle.
+            </li>
+          </ul>
+
+          <h1>Purchase Method</h1>
+          <p style="font-size: larger; line-height: 1.7rem">
+            If you are looking for a luxurious air freshener with a unique and
+            elegant fragrance that can fill your space with vitality and
+            grandeur, the
+            <strong style="color: rgb(188, 143, 27); font-weight: bold">
+              Royal Sultan Air Freshener
+            </strong>
+            is an exceptional choice. The royal and sophisticated scent of this
+            spray transforms any space into a unique and luxurious environment.
+          </p>
+
+          <p style="font-size: larger; line-height: 1.7rem">
+            To purchase the
+            <strong style="color: rgb(188, 143, 27); font-weight: bold">
+              Royal Sultan Air Freshener
+            </strong>
+            at the best price with fast delivery, visit the
+            <strong style="color: rgb(188, 143, 27); font-weight: bold"
+              >Royal</strong
+            >
+            online store and add this exceptional spray to your shopping cart
+            today.
+          </p>
+        </div>
+
+        <!-- Product Attributes -->
+
+        <div class="product-details"></div>
+        <div class="product-details"></div>
+      </div>
+    </div>
+    <script>
+      const imageContainer = document.getElementById("product-image-container");
+      const image = document.getElementById("product-image");
+
+      // Adjust the transform origin dynamically based on the cursor position
+      imageContainer.addEventListener("mousemove", (e) => {
+        const rect = imageContainer.getBoundingClientRect();
+        const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+        const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+        image.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+        image.style.transform = "scale(1.5)";
+      });
+
+      // Reset zoom when the mouse leaves the container
+      imageContainer.addEventListener("mouseleave", () => {
+        image.style.transform = "scale(1)";
+        image.style.transformOrigin = "center center";
+      });
+    </script>
+    <script>
+      // Select all elements that might contain bold syntax (**...**)
+      const contentElements = document.querySelectorAll(
+        "#content, .product-details p"
+      );
+
+      contentElements.forEach((element) => {
+        element.innerHTML = element.innerHTML.replace(
+          /\*\*(.*?)\*\*/g, // Match text between double asterisks
+          '<strong style="color: #333;">$1</strong>' // Replace with styled <strong>
+        );
+      });
+    </script>
+    <div id="footer"></div>
+    <script>
+      fetch("/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>
